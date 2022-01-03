@@ -1,0 +1,13 @@
+.profile__add {
+    margin: 0;
+    margin-left: 244px;
+    padding: 0;
+}
+
+@media screen and (max-width: 320px) {
+	.profile__add {
+        margin-top: 36px;
+        margin-left: 19px;
+        margin-right: 19px;
+    }
+}

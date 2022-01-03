@@ -1,0 +1,16 @@
+.profile__avatar-foto {
+    width: 100%;
+    background: #C4C4C4;
+    border-radius: 50%;
+}
+
+@media screen and (max-width: 320px) {
+	.profile__avatar-foto {
+        max-width: 120px;
+        min-height: 120px;
+        margin-left: 22.5px;
+        margin-right: 26.25px;
+        margin-top: 3.75px;
+        margin-bottom: 3.75px;
+    }
+}
