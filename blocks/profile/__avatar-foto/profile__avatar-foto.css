@@ -1,5 +1,5 @@
 .profile__avatar-foto {
-    width: 100%;
+    max-width: 120px;
     background: #C4C4C4;
     border-radius: 50%;
 }

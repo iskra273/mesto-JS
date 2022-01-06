@@ -1,0 +1,28 @@
+.popup__text-title {
+    position: absolute;
+    width: 358px;
+    height: 14px;
+    top: 111px;
+    left: 36px;
+    margin: 0;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+    border: none;
+    outline: none !important;
+    outline-offset: 0;
+    box-shadow: none;
+}
+
+@media screen and (max-width: 320px) {
+	.popup__text-title {
+        width: 238px;
+        height: 27px;
+        left: 22px;
+        top: 122px;
+        
+    }
+}

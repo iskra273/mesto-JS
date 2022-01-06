@@ -2,7 +2,14 @@
     margin: 0;
     margin-left: 244px;
     padding: 0;
+    opacity: 1;
+    transition: transform  0.5s linear;
 }
+
+.profile__add:hover {
+    opacity: 0.5;
+  }
+
 
 @media screen and (max-width: 320px) {
 	.profile__add {
