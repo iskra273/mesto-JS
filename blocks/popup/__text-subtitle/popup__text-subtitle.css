@@ -12,7 +12,6 @@
     line-height: 17px;
     color: #000000;
     border: none;
-    outline: none !important;
     outline-offset: 0;
     box-shadow: none;
 }
@@ -20,7 +19,7 @@
 @media screen and (max-width: 320px) {
 	.popup__text-subtitle {
         width: 238px;
-        height: 46px;
+        height: 27px;
         left: 22px;
         top: 179px;
     }

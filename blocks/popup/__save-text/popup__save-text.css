@@ -1,8 +1,12 @@
 .popup__save-text {
+    position: absolute;
     max-width: 109px;
     min-height: 18px;
     margin: 0 auto;
     padding: 0;
+    top: 251px;
+    left: 161px;
+    bottom: 61px;
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
@@ -13,10 +17,14 @@
 }
 
 @media screen and (max-width: 320px) {
-	.popup__save-text {
+    .popup__save-text {
         width: 74px;
         height: 18px;
+        top: 265px;
+        left: 104px;
+        bottom: 39px;
         font-size: 14px;
         line-height: 17px;
+
     }
 }
