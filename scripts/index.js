@@ -23,10 +23,9 @@ let formJobInput = document.querySelector('.profile__info-subtitle');
 function handleProfileEditSubmit (evt) {
     evt.preventDefault();          
     
-    nameInput.textContent = formNameInput.value;
-    jobInput.textContent = formJobInput.value;
-    formElement.addEventListener('submit', handleProfileEditSubmit); 
-    
+    formNameInput.textContent = nameInput.value;
+    formJobInput.textContent = jobInput.value;
+   
 }
 
- 
+formElement.addEventListener('submit', handleProfileEditSubmit); 
