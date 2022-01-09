@@ -7,4 +7,5 @@
     padding: 0;
     background-image: url(../../../images/add_button.svg);
     background-repeat: no-repeat;
+    z-index: 1;   
 }

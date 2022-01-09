@@ -12,7 +12,14 @@
     box-sizing: border-box;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 890px) {
+    .elements {
+        grid-template-columns: repeat(2, auto);
+        grid-template-rows: repeat(3, auto);
+    }
+}
+
+@media screen and (max-width: 540px) {
 	.elements {
         width: 282px;
         margin-top: 36px;

@@ -6,12 +6,11 @@
     background-image: url(../../../images/love.svg);
     background-repeat: no-repeat;
     background-size: contain;
+    border: none;
     opacity: 1;
     transition: transform  0.5s linear;
 }
 
 .element__like:hover {
     opacity: 0.5;
-
-
 }

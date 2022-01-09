@@ -1,10 +1,8 @@
 .popup__line-title {
-    position: absolute;
     width: 358px;
     height: 0;
-    top: 138px;
-    left: 36px;
     margin: 0;
+    margin-top: 13px;
     opacity: 0.2;
     border: 1px solid #000000;
 }
@@ -12,7 +10,5 @@
 @media screen and (max-width: 320px) {
 	.popup__line-title {
         width: 238px;
-        left: 22px;
-        top: 149px;
     }
 }

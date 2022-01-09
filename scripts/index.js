@@ -17,22 +17,16 @@ popupCloseButton.addEventListener('click', closePopup);
 let formElement = document.querySelector('.popup__form');  
 let nameInput = document.querySelector('.popup__text-title');
 let jobInput = document.querySelector('.popup__text-subtitle');
- 
-    function formSubmitHandler (evt) {
-        evt.preventDefault();
+let formNameInput = document.querySelector('.profile__info-title');
+let formJobInput = document.querySelector('.profile__info-subtitle');
     
-        let nameValue = nameInput.value
-        let jobValue = jobInput.value
-        
-        let formNameInput = document.querySelector('.profile__info-title');
-        let formJobInput = document.querySelector('.profile__info-subtitle');
-            
-        function textInput() {
-            formNameInput.textContent = nameValue;
-            formJobInput.textContent = jobValue;
-        }
+function handleProfileEditSubmit (evt) {
+    evt.preventDefault();          
+    
+    nameInput.textContent = formNameInput.value;
+    jobInput.textContent = formJobInput.value;
+    formElement.addEventListener('submit', handleProfileEditSubmit); 
+    
+}
 
-        textInput()
-    }
-
-formElement.addEventListener('submit', formSubmitHandler); 
+ 
