@@ -11,76 +11,71 @@
   <div class="content">
     <header class="header">
         <div class="header__logo"></div>
-        <div class="header__line"></div>
     </header>
   
     <main>
       <section class="profile">
         <img src="images/avatar.jpg" alt="Фото профиля" class="profile__avatar-foto">
-        <form name= "profile" class="profile__info">
+        <div class="profile__info">
           <div class="profile__title">
-            <input type="text" class="profile__info-title" value ="Жак-Ив Кусто">
-            <div class="profile__edit">
-              <div class="profile__edit-button">
-                <p class="profile__edit-icon"></p>
-              </div>   
-            </div>
+            <h1 class="profile__info-title">Жак-Ив Кусто</h1>
+            <button type="button" class="profile__edit">
+              <img src="images/edit_button.svg" alt="Карандашик" class="profile__edit-icon">   
+            </button>
           </div>
-          <input type="text" class="profile__info-subtitle" value = "Исследователь океана">  
-        </form>
-        <div class="profile__add">
-          <div class="profile__add-button">
-            <p class="profile__add-icon"></p>
-          </div>
+          <p class="profile__info-subtitle">Исследователь океана</p>  
         </div>
+        <button type="button" class="profile__add">
+          <img src="images/add_button.svg" alt="Изображение плюса" class="profile__add-icon">
+        </button>
       </section>
 
       <section class="elements">
         <div class="element">
           <img src="images/karach.jpg" alt="Замок в горах в Карачаевске" class="element__image">
           <div class="element__title">
-            <p class="element__name">Карачаевск</p>
-            <button class="element__like"></button>
+            <h2 class="element__name">Карачаевск</h2>
+            <button type="button" class="element__like"></button>
           </div>
         </div>  
           
         <div class="element">
           <img src="images/elbrus.jpg" alt="Вдали видна вершина Эльбруса" class="element__image">
           <div class="element__title">
-            <p class="element__name">Гора Эльбрус</p>
-            <button class="element__like"></button>
+            <h2 class="element__name">Гора Эльбрус</h2>
+            <button type="button" class="element__like"></button>
           </div>
         </div>
           
         <div class="element">
           <img src="images/dombai.jpg" alt="За лесовм горы Домбая" class="element__image">
           <div class="element__title">
-            <p class="element__name">Домбай</p>
-            <button class="element__like"></button>
+            <h2 class="element__name">Домбай</h2>
+            <button type="button" class="element__like"></button>
           </div>
         </div>
           
         <div class="element">
           <img src="images/elbrus.jpg" alt="Вдали видна вершина Эльбруса" class="element__image">
           <div class="element__title">
-            <p class="element__name">Гора Эльбрус</p>
-            <button class="element__like"></button>
+            <h2 class="element__name">Гора Эльбрус</h2>
+            <button type="button" class="element__like"></button>
           </div>
         </div>
 
         <div class="element">
           <img src="images/dombai.jpg" alt="За лесовм горы Домбая" class="element__image">
           <div class="element__title">
-            <p class="element__name">Домбай</p>
-            <button class="element__like"></button>
+            <h2 class="element__name">Домбай</h2>
+            <button type="button" class="element__like"></button>
           </div>
         </div>
 
         <div class="element">
           <img src="images/karach.jpg" alt="Замок в горах в Карачаевске" class="element__image">
           <div class="element__title">
-            <p class="element__name">Карачаево-Черкесия</p>
-            <button class="element__like"></button>
+            <h2 class="element__name">Карачаево-Черкесия</h2>
+            <button type="button" class="element__like"></button>
           </div>
         </div>     
       </section>
@@ -93,13 +88,11 @@
 
   <section class="popup">
     <div class="popup__container">
-      <button class="popup__close"></button>
+      <button type="button" class="popup__close"></button>
       <form name="popup" class="popup__form">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input type="text" class="popup__text-title" value ="Жак-Ив Кусто">
-        <p class="popup__line-title"></p>
-        <input type="text" class="popup__text-subtitle" value = "Исследователь океана">
-        <p class="popup__line-subtitle"></p>
+        <input type="text" class="popup__input popup__input_name_title" value = "">
+        <input type="text" class="popup__input popup__input_name_subtitle" value = "">
         <button type = "submit" class="popup__save">Сохранить</button>
       </form>                           
     </div>

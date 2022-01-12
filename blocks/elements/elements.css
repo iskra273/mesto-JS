@@ -4,28 +4,20 @@
     margin-top: 50px;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(auto-fit, 282px);
     grid-template-rows: repeat(2, auto);
-    gap: 20px 15px;
+    gap: 20px 17px;
     justify-content: center;
     align-content: center;
     box-sizing: border-box;
 }
 
-@media screen and (max-width: 890px) {
-    .elements {
-        grid-template-columns: repeat(2, auto);
-        grid-template-rows: repeat(3, auto);
-    }
-}
-
 @media screen and (max-width: 540px) {
 	.elements {
-        width: 282px;
+        max-width: 282px;
         margin-top: 36px;
         margin-left: 19px;
-        grid-template-columns: repeat(1, auto);
-        grid-template-rows: repeat(1, auto);
+        margin-right: 19px;
         gap: 20px;
     }
 }

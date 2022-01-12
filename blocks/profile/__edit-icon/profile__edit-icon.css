@@ -6,11 +6,10 @@
     margin-left: 7px;
     margin-right: 7px;
     padding: 0;
-    background-image: url(../../../images/edit_button.svg);
     background-repeat: no-repeat;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 540px) {
 	.profile__edit-icon {
         max-width: 7.5px;
         height: 7.5px;

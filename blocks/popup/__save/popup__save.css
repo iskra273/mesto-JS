@@ -5,6 +5,7 @@
     margin-left: 36px;
     margin-right: 36px;
     margin-bottom: 37px;
+    padding: 0;
     background: #000000;
     border-radius: 2px;
     border: 0;
@@ -28,8 +29,7 @@
     z-index: 1;
   }
 
-
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 540px) {
 	.popup__save {
         width: 238px;
         height: 46px;
@@ -38,7 +38,7 @@
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 540px) {
 	.popup__save[type="submit"] {
         font-size: 14px;
         line-height: 17px;

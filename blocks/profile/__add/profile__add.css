@@ -1,9 +1,16 @@
 .profile__add {
+    width: 150px;
+    height: 50px;
     margin: 0;
     margin-left: 244px;
     padding: 0;
     opacity: 1;
     transition: transform  0.5s linear;
+    border: 2px solid #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 2px;
+    background-color: transparent;
+    z-index: 0;
 }
 
 .profile__add:hover {
@@ -13,11 +20,14 @@
 @media screen and (max-width: 890px) {
 	.profile__add {
         margin-left: 0;
+        margin-top: 36px;
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 540px) {
 	.profile__add {
+        width: 282px;
+        min-height: 50px;
         margin-top: 36px;
         margin-left: 19px;
         margin-right: 19px;
