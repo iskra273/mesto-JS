@@ -8,11 +8,17 @@
     justify-content: center;
 }
 
+@media screen and (max-width: 890px) {
+	.profile__info {
+        margin-top: 26px;
+        margin-left: 0;
+    }
+}
+
 @media screen and (max-width: 540px) {
 	.profile__info {
         max-width: 282px;
         margin-top: 26px;
-        margin-left: 19px;
-        margin-right: 19px;
+        margin-left: 0;
     }
 }

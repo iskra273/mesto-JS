@@ -6,12 +6,12 @@
     margin-right: 36px;
     margin-bottom: 37px;
     padding: 0;
-    background: #000000;
+    background: #000;
     border-radius: 2px;
     border: 0;
+    cursor: pointer;
     opacity: 1;
-    transition: transform  0.5s linear;
-    z-index: 0;
+    transition: opacity  0.5s linear;
 }
 
 .popup__save:hover {
@@ -25,8 +25,7 @@
     font-size: 18px;
     line-height: 22px;
     text-align: center;
-    color: #FFFFFF;
-    z-index: 1;
+    color: #fff;
   }
 
 @media screen and (max-width: 540px) {
