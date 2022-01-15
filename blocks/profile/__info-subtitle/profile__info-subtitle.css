@@ -16,11 +16,16 @@
     overflow: hidden;
 }
 
+@media screen and (max-width: 890px) {
+	.profile__info-subtitle {
+        text-align: center;
+    }
+}
+
 @media screen and (max-width: 540px) {
 	.profile__info-subtitle {
         width: 282px;
         font-size: 14px;
         line-height: 17px;
-        text-align: center;
     }
 }
