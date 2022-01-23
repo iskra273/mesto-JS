@@ -1,8 +1,15 @@
 .popup__image-element {
     width: 433px;
     height: 540px;
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
     background-image: url();
     border-radius: 0px;
+}
+
+@media screen and (max-width: 540px) {
+	.popup__image-element {
+        max-width: 240px;
+        height: 299px;
+    }
 }
