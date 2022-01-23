@@ -1,0 +1,9 @@
+.element__delete-top {
+    width: 18px;
+    height: 4.49px;
+    margin: 0 auto;
+    margin-bottom: 1.3px;
+    padding: 0;
+    background-image: url(../../../images/delete_top.svg);
+    align-items: center;
+}

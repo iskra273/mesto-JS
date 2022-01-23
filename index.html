@@ -27,55 +27,7 @@
         </button>
       </section>
 
-      <section class="elements">
-        <div class="element">
-          <img src="images/karach.jpg" alt="Замок в горах в Карачаевске" class="element__image">
-          <div class="element__title">
-            <h2 class="element__name">Карачаевск</h2>
-            <button type="button" class="element__like"></button>
-          </div>
-        </div>  
-          
-        <div class="element">
-          <img src="images/elbrus.jpg" alt="Вдали видна вершина Эльбруса" class="element__image">
-          <div class="element__title">
-            <h2 class="element__name">Гора Эльбрус</h2>
-            <button type="button" class="element__like"></button>
-          </div>
-        </div>
-          
-        <div class="element">
-          <img src="images/dombai.jpg" alt="За лесовм горы Домбая" class="element__image">
-          <div class="element__title">
-            <h2 class="element__name">Домбай</h2>
-            <button type="button" class="element__like"></button>
-          </div>
-        </div>
-          
-        <div class="element">
-          <img src="images/elbrus.jpg" alt="Вдали видна вершина Эльбруса" class="element__image">
-          <div class="element__title">
-            <h2 class="element__name">Гора Эльбрус</h2>
-            <button type="button" class="element__like"></button>
-          </div>
-        </div>
-
-        <div class="element">
-          <img src="images/dombai.jpg" alt="За лесовм горы Домбая" class="element__image">
-          <div class="element__title">
-            <h2 class="element__name">Домбай</h2>
-            <button type="button" class="element__like"></button>
-          </div>
-        </div>
-
-        <div class="element">
-          <img src="images/karach.jpg" alt="Замок в горах в Карачаевске" class="element__image">
-          <div class="element__title">
-            <h2 class="element__name">Карачаево-Черкесия</h2>
-            <button type="button" class="element__like"></button>
-          </div>
-        </div>     
-      </section>
+      <section class="elements"></section>
     </main>
 
     <footer class="footer">
@@ -83,7 +35,7 @@
     </footer>      
   </div>
 
-  <section class="popup">
+  <section class="popup popup_type_edit">
     <div class="popup__container">
       <button type="button" class="popup__close"></button>
       <form name="popup" class="popup__form">
@@ -93,7 +45,44 @@
         <button type = "submit" class="popup__save">Сохранить</button>
       </form>                           
     </div>
-  </section>  
+  </section>
+  
+  <section class="popup popup_type_add-element">
+    <div class="popup__container">
+      <button type="button" class="popup__close"></button>
+      <form name="popup" class="popup__form">
+        <h2 class="popup__title">Новое место</h2>
+        <input type="text" name="name" class="popup__input popup__input_name_add-name" placeholder = "Название" value = "">
+        <input type="text" name="link" class="popup__input popup__input_name_add-link" placeholder = "Ссылка на картинку" value = "">
+        <button type = "submit" class="popup__save">Сохранить</button>
+      </form>                           
+    </div>
+  </section> 
+
+  <section class="popup popup_type_image-element">
+    <div class="popup__container-image">
+      <button type="button" class="popup__close popop__close_image_vert"></button>
+      <figure class="popup__image">
+        <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg" alt="#" class="popup__image-element">
+        <figcaption class="popup__caption">Байкал</figcaption>
+      </figure>  
+    </div>
+          
+  </section> 
+
+  <template class="element-template">
+    <div class="element">
+      <button type="button" class="element__delete">
+        <div class="element__delete-top"></div>
+        <div class="element__delete-basket"></div>
+      </button>
+      <img src="" alt="" class="element__image">
+      <div class="element__title">
+        <h2 class="element__name"></h2>
+        <button type="button" class="element__like"></button>
+      </div>
+    </div>
+  </template>
   
   <script src="./scripts/index.js"></script>
 </body>
