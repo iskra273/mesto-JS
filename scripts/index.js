@@ -102,7 +102,6 @@ editForm.addEventListener('submit', (event) => {
 })
 
 
-
 function createElement(elementData) {
   const cardElement = elementTemplate.cloneNode(true)
   const elementImage = cardElement.querySelector('.element__image')
@@ -111,7 +110,7 @@ function createElement(elementData) {
   const likeButton = cardElement.querySelector('.element__like')
   const card = cardElement.querySelector('.element')
   const popupImage =  document.querySelector('.popup_type_image-element')
-  const popupCloseImage = document.querySelector('.popop__close_image_vert')
+  const popupCloseImage = document.querySelector('.popup__close_image_vert')
   const popupImagePhoto= document.querySelector('.popup__image-element')
   const popupImageCaption =  document.querySelector('.popup__caption')
   
@@ -125,12 +124,10 @@ function createElement(elementData) {
     card.remove()
   }
 
-
   function addLike() {
     likeButton.classList.add('element__like_active');
   }
  
-
   function openPopupImage() {
     popupImage.classList.add('popup_opened');
     addImageElement()
@@ -145,6 +142,7 @@ function createElement(elementData) {
     popupImage.classList.remove('popup_opened');
 }
   
+
   likeButton.addEventListener('click', addLike)
   deleteButton.addEventListener('click', deleteElement)
   elementImage.addEventListener('click', openPopupImage)

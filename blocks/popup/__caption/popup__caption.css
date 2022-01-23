@@ -13,3 +13,10 @@
     text-align: left;
     align-self: flex-start;  
 }
+
+
+@media screen and (max-width: 540px) {
+	.popup__caption {
+        max-width: 240px;
+    }
+}
