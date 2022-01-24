@@ -8,6 +8,7 @@
     top: 20px;
     background-color: transparent;
     border: none;
+    background-image: url(../../../images/delete_group.svg);
     background-repeat: no-repeat;
     background-size: contain;
     z-index: 0;

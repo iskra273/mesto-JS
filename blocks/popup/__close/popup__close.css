@@ -2,8 +2,8 @@
     position: absolute;
     width: 32px;
     height: 32px;
-    bottom: 338px;
-    left: 438px;
+    right: -40px;
+    top: -40px;
     margin: 0;
     padding: 0;
     background-image: url(../../../images/close.svg);
@@ -23,8 +23,7 @@
 	.popup__close {
         max-width: 20px;
         height: 20px;
-        bottom: 346px;
-        left: 262px;
+        right: 0;
         background-image: url(../../../images/close_mobile.svg);
     }
 }

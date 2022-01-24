@@ -1,9 +1,8 @@
 .popup__image-element {
-    width: 433px;
-    height: 540px;
+    max-width: 75vw;
+    max-height: 75vh;
     margin: 0 auto;
     padding: 0;
-    background-image: url();
     border-radius: 0px;
 }
 
