@@ -1,4 +1,7 @@
 .popup_type_image-element {
     display: flex;
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity  0.5s linear;
+    /* transition: visibility  0.5s linear; */
 }

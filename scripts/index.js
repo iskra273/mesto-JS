@@ -59,11 +59,6 @@ const inputProfileSubtitle = document.querySelector('.popup__input_name_subtitle
 // 
 const list = document.querySelector('.elements')  
 const elementTemplate = document.querySelector('.element-template').content
-const popup = document.querySelector('.popup')
-console.log(popup);
-
-
-
 
 // function openPopup(popup) {
 //   popup.classList.add('popup_opened')
@@ -76,27 +71,28 @@ console.log(popup);
 
 
 // // Закрытие попапа по клику фона
-// function closeProfilePopupOverlay() {
-
-//   profileEditModal.classList.remove('popup_opened')
-// }
-
-// profileEditModal.addEventListener('click', closeProfilePopupOverlay);
-
-
-// function closeAddPopupOverlay() {
-//   cardAddModal.classList.remove('popup_opened')
-// }
-
-// cardAddModal.addEventListener('click', closeAddPopupOverlay);
-
-
-function closeImagePopupOverlay() {
-  imageOpenModal.classList.remove('popup_opened')
+function closeProfilePopupOverlay() {
+  if (event.target === event.currentTarget)
+  profileEditModal.classList.remove('popup_opened')
 }
 
-imageOpenModal.addEventListener('click', closeImagePopupOverlay);
+profileEditModal.addEventListener('click', closeProfilePopupOverlay);
 
+
+function closeAddPopupOverlay() {
+  if (event.target === event.currentTarget)
+  cardAddModal.classList.remove('popup_opened')
+}
+
+cardAddModal.addEventListener('click', closeAddPopupOverlay);
+
+
+function closeImagePopupOverlay(event) {
+  if (event.target === event.currentTarget)
+  imageOpenModal.classList.remove('popup_opened')
+}
+    
+imageOpenModal.addEventListener('mousedown', closeImagePopupOverlay);
 
 
 

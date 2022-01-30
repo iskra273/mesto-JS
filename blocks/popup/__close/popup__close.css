@@ -12,6 +12,7 @@
     border: none;
     opacity: 1;
     transition: opacity  0.5s linear;
+    transition: visibility  0.5s linear;
 }
 
 .popup__close:hover {
