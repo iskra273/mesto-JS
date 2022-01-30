@@ -1,0 +1,12 @@
+.popup__save_disabled {
+    background: #f1f1f1;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 2px;
+    opacity: 0.2;
+    cursor: default;
+}
+
+.popup__save_disabled[type="submit"] {
+    color: #000;
+  }

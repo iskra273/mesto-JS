@@ -38,11 +38,13 @@
   <section class="popup popup_type_edit">
     <div class="popup__container">
       <button type="button" class="popup__close"></button>
-      <form name="popup" class="popup__form">
+      <form name="popup" class="popup__form" novalidate>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input type="text" class="popup__input popup__input_name_title" value = "">
-        <input type="text" class="popup__input popup__input_name_subtitle" value = "">
-        <button type = "submit" class="popup__save">Сохранить</button>
+        <input id="title-input" type="text" required minlength="2" maxlength="40" class="popup__input popup__input_name_title popup__input_type_error" value = "">
+        <span id="error-title-input" class="popup__error popup__error_visible">Вы пропустили это поле.</span>
+        <input id="subtitle-input" type="text" required minlength="2" maxlength="200" class="popup__input popup__input_name_subtitle popup__input_type_error" value = "">
+        <span id="error-subtitle-input" class="popup__error popup__error_visible">Вы пропустили это поле.</span>
+        <button type = "submit" class="popup__save popup__save_disabled">Сохранить</button>
       </form>                           
     </div>
   </section>
@@ -50,11 +52,13 @@
   <section class="popup popup_type_add-element">
     <div class="popup__container">
       <button type="button" class="popup__close"></button>
-      <form name="popup" class="popup__form">
+      <form name="popup" class="popup__form" novalidate>
         <h2 class="popup__title">Новое место</h2>
-        <input type="text" name="name" class="popup__input popup__input_name_add-name" placeholder = "Название" value = "">
-        <input type="text" name="link" class="popup__input popup__input_name_add-link" placeholder = "Ссылка на картинку" value = "">
-        <button type = "submit" class="popup__save">Сохранить</button>
+        <input id="name-input" type="text" name="name" required minlength="2" maxlength="30" class="popup__input popup__input_name_add-name popup__input_type_error" placeholder = "Название" value = "">
+        <span id="error-name-input" class="popup__error popup__error_visible">Вы пропустили это поле.</span>
+        <input id="link-input" type="url" minlength="1" name="link" required class="popup__input popup__input_name_add-link popup__input_type_error" placeholder = "Ссылка на картинку" value = "">
+        <span id="error-link-input" class="popup__error popup__error_visible">Введите адрес сайта.</span>
+        <button type = "submit" class="popup__save popup__save_disabled">Создать</button>
       </form>                           
     </div>
   </section> 
@@ -66,8 +70,7 @@
         <img src="#" alt="#" class="popup__image-element">
         <figcaption class="popup__caption"></figcaption>
       </figure>  
-    </div>
-          
+    </div>       
   </section> 
 
   <template class="element-template">
@@ -82,5 +85,7 @@
   </template>
   
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
+
 </body>
 </html>
