@@ -28,8 +28,7 @@ const initialCards = [
 // Модальные окна
 const profileEditModal =  document.querySelector('.popup_type_edit')
 const cardAddModal = document.querySelector('.popup_type_add-element')
-const imageOpenModal= document.querySelector('.popup_type_image-element') 
-
+const imageOpenModal= document.querySelector('.popup_type_image-element')
 
 // Поля профиля
 const profileTitle =  document.querySelector('.profile__info-title')
@@ -42,46 +41,47 @@ const cardAddForm =  cardAddModal.querySelector('.popup__form')
 // Кнопки
 const profileEditButton = document.querySelector('.profile__edit');
 const profileEditModalCloseButton = profileEditModal.querySelector('.popup__close');
-
 const cardAddButton = document.querySelector('.profile__add')
 const cardAddModalCloseButton = cardAddModal.querySelector('.popup__close');
-
 const imageCloseButton = imageOpenModal.querySelector('.popup__close');
-
 
 // Инпуты
 const inputCardName = document.querySelector('.popup__input_name_add-name')
 const inputCardLink = document.querySelector('.popup__input_name_add-link')
-
 const inputProfileTitle = document.querySelector('.popup__input_name_title')
 const inputProfileSubtitle = document.querySelector('.popup__input_name_subtitle')
 
-// 
+// Общее
 const list = document.querySelector('.elements')  
 const elementTemplate = document.querySelector('.element-template').content
+const popup =  document.querySelectorAll('.popup')
 
-// function openPopup(popup) {
-//   popup.classList.add('popup_opened')
-// }
+// Фото места
+const popupImagePhoto =  document.querySelector('.popup__image-element')
+const popupImageCaption =  document.querySelector('.popup__caption')
 
-// function closePopup(popup) {
-//   popup.classList.remove('popup_opened')
-// }
 
+function openPopup(popup) {
+  popup.classList.add('popup_opened')
+}
+
+function closePopup(popup) {
+  popup.classList.remove('popup_opened')
+}
 
 
 // // Закрытие попапа по клику фона
-function closeProfilePopupOverlay() {
+function closeProfilePopupOverlay(event) {
   if (event.target === event.currentTarget)
-  profileEditModal.classList.remove('popup_opened')
+  closePopup(profileEditModal)
 }
 
 profileEditModal.addEventListener('click', closeProfilePopupOverlay);
 
 
-function closeAddPopupOverlay() {
+function closeAddPopupOverlay(event) {
   if (event.target === event.currentTarget)
-  cardAddModal.classList.remove('popup_opened')
+  closePopup(cardAddModal)
 }
 
 cardAddModal.addEventListener('click', closeAddPopupOverlay);
@@ -89,65 +89,47 @@ cardAddModal.addEventListener('click', closeAddPopupOverlay);
 
 function closeImagePopupOverlay(event) {
   if (event.target === event.currentTarget)
-  imageOpenModal.classList.remove('popup_opened')
+  closePopup(imageOpenModal)
 }
     
 imageOpenModal.addEventListener('mousedown', closeImagePopupOverlay);
 
-
-
-//Закрытие попапа кнопкой Esc (установить при открытии попапа и удалить при закрыти, чтобы он работал только при открытом попапе)
-function closeProfilePopupEsc(event) {
-  if(event.key === 'Escape') {
-    profileEditModal.classList.remove('popup_opened')
-  }
- 
+//Закрытие попапа кнопкой Esc
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup)
+  } 
 }
-document.addEventListener('keydown', closeProfilePopupEsc);
-
-
-
-function closeAddPopupEsc(event) {
-  if(event.key === 'Escape') {
-    cardAddModal.classList.remove('popup_opened')
-  }  
-}
-
-document.addEventListener('keydown', closeAddPopupEsc);
-
-function closeImagePopupEsc(event) {
-  if(event.key === 'Escape') {
-    imageOpenModal.classList.remove('popup_opened')
-  }  
-}
-
-document.addEventListener('keydown', closeImagePopupEsc);
-
+  
+document.addEventListener('keydown', closeByEscape);
+document.removeEventListener('keydown', closeByEscape);
+  
 
 // Открытие и закрытие попапа редактирования профайла
 profileEditButton.addEventListener('click', function() {
-  profileEditModal.classList.add('popup_opened')
+  openPopup(profileEditModal)
 
   inputProfileTitle.value = profileTitle.textContent; 
   inputProfileSubtitle.value = profileSubtitle.textContent;
 })
 
 profileEditModalCloseButton .addEventListener('click', function() {
-  profileEditModal.classList.remove('popup_opened')
+  closePopup(profileEditModal)
 })
   
 // Открытие и закрытие попапа добавления места
 cardAddButton.addEventListener('click', function() {
-  cardAddModal.classList.add('popup_opened')
+  openPopup(cardAddModal)
 })
 
 cardAddModalCloseButton.addEventListener('click', function() {
-  cardAddModal.classList.remove('popup_opened')
+  closePopup(cardAddModal)
 })
   
 // Закрытие попапа фото места
 imageCloseButton.addEventListener('click', function() {
-  imageOpenModal.classList.remove('popup_opened')
+  closePopup(imageOpenModal)
 });
 
 
@@ -159,7 +141,11 @@ cardAddForm.addEventListener('submit', (event) => {
     link: inputCardLink.value
   });
 
-  cardAddModal.classList.remove('popup_opened')
+    // cardAddModal.classList.remove('popup_opened');
+  closePopup(imageOpenModal);
+  cardAddForm.reset();
+    toggleButton(cardAddForm, toggleButtonObject);
+
 })
 
 //Закрытие редактирования профиля по кнопке Сохранить
@@ -168,7 +154,7 @@ profileEditForm.addEventListener('submit', (event) => {
   
   profileTitle.textContent = inputProfileTitle.value
   profileSubtitle.textContent = inputProfileSubtitle.value
-  profileEditModal.classList.remove('popup_opened')
+  closePopup(profileEditModal)
 })
 
 // Добавление карточки
@@ -179,9 +165,6 @@ function createCard (item) {
   const deleteButton = cardElement.querySelector('.element__delete')
   const likeButton = cardElement.querySelector('.element__like')
   const card = cardElement.querySelector('.element')
-  const popupImagePhoto =  document.querySelector('.popup__image-element')
-  const popupImageCaption =  document.querySelector('.popup__caption')
-  
   
   elementName.textContent = item.name
   elementImage.src = item.link
@@ -200,10 +183,12 @@ function createCard (item) {
   deleteButton.addEventListener('click', deleteElement)
 
   elementImage.addEventListener('click', function() {
-    imageOpenModal.classList.add('popup_opened')
+    // imageOpenModal.classList.add('popup_opened')
+    openPopup(imageOpenModal)
 
     popupImagePhoto.src = item.link
     popupImageCaption.textContent = item.name
+    popupImagePhoto.alt = item.name
   });
   
   return cardElement;

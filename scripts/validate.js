@@ -30,15 +30,25 @@ function toggleButton(form, {submitButtonSelector, inactiveButtonClass}) {
     }
 }
 
+const toggleButtonObject = {
+    submitButtonSelector: '.popup__save',
+    inactiveButtonClass: 'popup__save_disabled'
+}
+
 function validateInput(form, input, classes) {
     
     const errorContainer = form.querySelector(`#error-${input.id}`);
+    const errorContainerLink = form.querySelector('#error-link-input');
+    console.log(input.validationMessage);
     
     if (input.validity.valid) {
         hideError(input, errorContainer, classes);
+        errorContainer.textContent = '';
 
     } else {
         showError(input, errorContainer, classes);
+        errorContainer.textContent = 'Вы пропустили это поле.';
+        errorContainerLink.textContent = 'Введите адрес сайта.'
     }
 
     toggleButton(form, classes);
