@@ -142,7 +142,7 @@ cardAddForm.addEventListener('submit', (event) => {
   closePopup(cardAddModal);
   
   cardAddForm.reset();
-    toggleButton(cardAddForm, toggleButtonObject);
+    toggleButton(cardAddForm, settings);
 
 })
 

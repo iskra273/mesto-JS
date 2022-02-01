@@ -1,14 +1,13 @@
 
 function submitForm(event) {
     event.preventDefault();
-
     console.log('form submitted')
-    
 }
 
 function showError(input, errorContainer, {inputErrorClass, errorVisibleClass})  {
     input.classList.add(inputErrorClass);
     errorContainer.classList.add(errorVisibleClass);
+    errorContainer.textContent = input.validationMessage;
 }
 
 function hideError(input, errorContainer, {inputErrorClass, errorVisibleClass})  {
@@ -43,11 +42,9 @@ function validateInput(form, input, classes) {
     
     if (input.validity.valid) {
         hideError(input, errorContainer, classes);
-        errorContainer.textContent = '';
 
     } else {
         showError(input, errorContainer, classes);
-        errorContainer.textContent = input.validationMessage;
     }
 
     toggleButton(form, classes);
@@ -71,11 +68,10 @@ function enableValidation({formSelector, inputSelector, ...rest}) {
 
         toggleButton(form, rest);
     });
-
 } 
 
 
-enableValidation({
+const settings = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
     inputErrorClass: 'popup__input_type_error',
@@ -83,4 +79,6 @@ enableValidation({
     errorClass: '.popup__error',
     submitButtonSelector: '.popup__save',
     inactiveButtonClass: 'popup__save_disabled'
-});
+}
+
+enableValidation(settings);
