@@ -54,23 +54,25 @@ const inputProfileSubtitle = document.querySelector('.popup__input_name_subtitle
 // Общее
 const list = document.querySelector('.elements')  
 const elementTemplate = document.querySelector('.element-template').content
-const popup =  document.querySelectorAll('.popup')
+const popups =  document.querySelectorAll('.popup')
 
 // Фото места
 const popupImagePhoto =  document.querySelector('.popup__image-element')
 const popupImageCaption =  document.querySelector('.popup__caption')
 
 
-function openPopup(popup) {
-  popup.classList.add('popup_opened')
+function openPopup(popups) {
+  popups.classList.add('popup_opened')
+  document.addEventListener('keydown', closeByEscape);
 }
 
-function closePopup(popup) {
-  popup.classList.remove('popup_opened')
+function closePopup(popups) {
+  popups.classList.remove('popup_opened')
+  document.removeEventListener('keydown', closeByEscape);
 }
 
 
-// // Закрытие попапа по клику фона
+//Закрытие попапа по клику фона
 function closeProfilePopupOverlay(event) {
   if (event.target === event.currentTarget)
   closePopup(profileEditModal)
@@ -101,10 +103,6 @@ function closeByEscape(evt) {
     closePopup(openedPopup)
   } 
 }
-  
-document.addEventListener('keydown', closeByEscape);
-document.removeEventListener('keydown', closeByEscape);
-  
 
 // Открытие и закрытие попапа редактирования профайла
 profileEditButton.addEventListener('click', function() {
@@ -141,8 +139,8 @@ cardAddForm.addEventListener('submit', (event) => {
     link: inputCardLink.value
   });
 
-    // cardAddModal.classList.remove('popup_opened');
-  closePopup(imageOpenModal);
+  closePopup(cardAddModal);
+  
   cardAddForm.reset();
     toggleButton(cardAddForm, toggleButtonObject);
 
@@ -183,7 +181,6 @@ function createCard (item) {
   deleteButton.addEventListener('click', deleteElement)
 
   elementImage.addEventListener('click', function() {
-    // imageOpenModal.classList.add('popup_opened')
     openPopup(imageOpenModal)
 
     popupImagePhoto.src = item.link

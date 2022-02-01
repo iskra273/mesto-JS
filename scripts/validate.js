@@ -14,6 +14,7 @@ function showError(input, errorContainer, {inputErrorClass, errorVisibleClass}) 
 function hideError(input, errorContainer, {inputErrorClass, errorVisibleClass})  {
     input.classList.remove(inputErrorClass);
     errorContainer.classList.remove(errorVisibleClass);
+    errorContainer.textContent = '';
 }
 
 function toggleButton(form, {submitButtonSelector, inactiveButtonClass}) {
@@ -24,6 +25,7 @@ function toggleButton(form, {submitButtonSelector, inactiveButtonClass}) {
     if (isFormValid) {
         button.classList.remove(inactiveButtonClass);
         button.removeAttribute('disabled');
+
     } else {
         button.classList.add(inactiveButtonClass);
         button.setAttribute('disabled', '');
@@ -36,9 +38,7 @@ const toggleButtonObject = {
 }
 
 function validateInput(form, input, classes) {
-    
     const errorContainer = form.querySelector(`#error-${input.id}`);
-    const errorContainerLink = form.querySelector('#error-link-input');
     console.log(input.validationMessage);
     
     if (input.validity.valid) {
@@ -47,8 +47,7 @@ function validateInput(form, input, classes) {
 
     } else {
         showError(input, errorContainer, classes);
-        errorContainer.textContent = 'Вы пропустили это поле.';
-        errorContainerLink.textContent = 'Введите адрес сайта.'
+        errorContainer.textContent = input.validationMessage;
     }
 
     toggleButton(form, classes);
