@@ -31,10 +31,10 @@ function toggleButton(form, {submitButtonSelector, inactiveButtonClass}) {
     }
 }
 
-const toggleButtonObject = {
-    submitButtonSelector: '.popup__save',
-    inactiveButtonClass: 'popup__save_disabled'
-}
+// const toggleButtonObject = {
+//     submitButtonSelector: '.popup__save',
+//     inactiveButtonClass: 'popup__save_disabled'
+// }
 
 function validateInput(form, input, classes) {
     const errorContainer = form.querySelector(`#error-${input.id}`);
