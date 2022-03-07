@@ -1,13 +1,11 @@
 
-// import { validationConfig } from './constants.js'
-
 export class FormValidator {
     constructor(settings, form) {
         this._form = form
         this._settings = settings
-
-        this._inputs = this._form.querySelectorAll(settings.inputSelector);
-        this._button = this._form.querySelector(settings.submitButtonSelector); 
+        
+        this._inputs = this._form.querySelectorAll(this._settings.inputSelector);
+        this._button = this._form.querySelector(this._settings.submitButtonSelector); 
     }
 
     _showError(input, errorContainer)  {
@@ -25,21 +23,23 @@ export class FormValidator {
     }
 
     _toggleButton() {
+        
         const {inactiveButtonClass} = this._settings
         
         const isFormValid = this._form.checkValidity();
-    
+        console.log('isFormValid');
         if (isFormValid) {
-            button.classList.remove(inactiveButtonClass);
-            button.removeAttribute('disabled');
+            this._button.classList.remove(inactiveButtonClass);
+            this._button.removeAttribute('disabled');
     
         } else {
-            button.classList.add(inactiveButtonClass);
-            button.setAttribute('disabled', '');
+            this._button.classList.add(inactiveButtonClass);
+            this._button.setAttribute('disabled', '');
         }
     }
 
-    _validateInput() {
+    _validateInput(input) {
+        console.log('in validate input')
         const errorContainer = this._form.querySelector(`#error-${input.id}`);
         
         if (input.validity.valid) {
@@ -53,12 +53,17 @@ export class FormValidator {
     }
 
     enableValidation() {
+        console.log('enable')
         this._form.addEventListener('submit', (event) => {
             event.preventDefault();
+            console.log('form submitted')
         });
         
-        
-        this._validateInput(input, classes)            
+        this._inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                this._validateInput(input);
+            });
+        });        
         
     } 
 }

@@ -1,17 +1,25 @@
+import { imageOpenModal, popupImagePhoto, popupImageCaption } from './constants.js'
 import { openPopup } from './utils.js'
-import { imageOpenModal, popupImagePhoto, popupImageCaption} from './constants.js'
+
 
 export class Card {
-  constructor(item, cardTemplateSelector) {
-    this._name = data.name
-    this._link = data.link
+  constructor(elementData, cardTemplateSelector) {
+    this._name = elementData.name
+    this._link = elementData.link
     this._template = document.querySelector(cardTemplateSelector).content
 
   }
+  _deleteElement = () => {
+    this._card.remove()
+  };
 
+  _addLike = () => {
+    this._likeButton.classList.toggle('element__like_active');
+  };
+ 
   _setEventListeners() {
-    this._likeButton.addEventListener('click', this_.addLike)
-    this._deleteButton.addEventListener('click', this_.deleteElement)
+    this._likeButton.addEventListener('click', this._addLike)
+    this._deleteButton.addEventListener('click', this._deleteElement)
     this._elementImage.addEventListener('click', function() {
       openPopup(imageOpenModal)
       
@@ -20,42 +28,24 @@ export class Card {
       popupImagePhoto.alt = this._name
     });
   }
-    
- _fillCard() {
+  
+  _fillCard() {
     this._elementName.textContent = this._name
     this._elementImage.src = this._link
     this._elementImage.alt = this._name  
- }
+  }
 
   createCard () {
     this._cardElement = this._template.cloneNode(true)
-    this._elementImage = cardElement.querySelector('.element__image')
-    this._elementName = cardElement.querySelector('.element__name')
-    this._deleteButton = cardElement.querySelector('.element__delete')
-    this._likeButton = cardElement.querySelector('.element__like')
-    const card = cardElement.querySelector('.element')
+    this._elementImage = this._cardElement.querySelector('.element__image')
+    this._elementName = this._cardElement.querySelector('.element__name')
+    this._deleteButton = this._cardElement.querySelector('.element__delete')
+    this._likeButton = this._cardElement.querySelector('.element__like')
+    this._card = this._cardElement.querySelector('.element')
         
-    this._fillCard()
-      
-
-    _deleteElement = () => {
-      card.remove()
-    };
-      
-    _addLike() = () => {
-      this._likeButton.classList.toggle('element__like_active');
-    };
-        
-
-    this._setEventListeners()
-        
+    this._fillCard()       
+    this._setEventListeners()    
     return this._cardElement; 
   }
 
 };
-
-
-// const cardTemplateSelector = '.element-template'
-// const card = new Card({ name: '', link: ''}, cardTemplateSelector)
-// const cardElement = card.createCard()
-// list.prepend(cardElement)

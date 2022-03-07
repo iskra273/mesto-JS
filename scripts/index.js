@@ -1,11 +1,40 @@
+import { validationConfig, imageOpenModal, popupImagePhoto, popupImageCaption } from './constants.js'
+import { openPopup } from './utils.js'
 import { FormValidator } from './FormValidator.js'
 import { Card } from './Card.js'
-import { validationConfig, initialCards, imageOpenModal } from './constants.js'
-import { openPopup } from './utils.js'
+
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
 
 // Модальные окна
 const profileEditModal =  document.querySelector('.popup_type_edit')
 const cardAddModal = document.querySelector('.popup_type_add-element')
+
 
 // Поля профиля
 const profileTitle =  document.querySelector('.profile__info-title')
@@ -30,28 +59,20 @@ const inputProfileSubtitle = document.querySelector('.popup__input_name_subtitle
 
 // Общее
 const list = document.querySelector('.elements')  
-const cardTemplateSelector = '.element-template'
 const elementTemplate = document.querySelector('.element-template').content
 const popups =  document.querySelectorAll('.popup')
 
 // Фото места
-
 
 const editFormValidator = new FormValidator(validationConfig, profileEditModal)
 const addCardFormValidator = new FormValidator(validationConfig, cardAddModal)
 editFormValidator.enableValidation()
 addCardFormValidator.enableValidation()
 
-// function openPopup(popups) {
-//   popups.classList.add('popup_opened')
-//   document.addEventListener('keydown', closeByEscape);
-// }
-
 function closePopup(popups) {
   popups.classList.remove('popup_opened')
   document.removeEventListener('keydown', closeByEscape);
 }
-
 
 //Закрытие попапа по клику фона
 function closeProfilePopupOverlay(event) {
@@ -135,49 +156,15 @@ profileEditForm.addEventListener('submit', (event) => {
   closePopup(profileEditModal)
 })
 
-// Добавление карточки
-// function createCard (item) {
-//   const cardElement = elementTemplate.cloneNode(true)
-//   const elementImage = cardElement.querySelector('.element__image')
-//   const elementName = cardElement.querySelector('.element__name')
-//   const deleteButton = cardElement.querySelector('.element__delete')
-//   const likeButton = cardElement.querySelector('.element__like')
-//   const card = cardElement.querySelector('.element')
-  
-//   elementName.textContent = item.name
-//   elementImage.src = item.link
-//   elementImage.alt = item.name
-
-  
-//   function deleteElement() {
-//     card.remove()
-//   }
-
-//   function addLike() {
-//     likeButton.classList.toggle('element__like_active');
-//   }
-  
-//   likeButton.addEventListener('click', addLike)
-//   deleteButton.addEventListener('click', deleteElement)
-
-//   elementImage.addEventListener('click', function() {
-//     openPopup(imageOpenModal)
-
-//     popupImagePhoto.src = item.link
-//     popupImageCaption.textContent = item.name
-//     popupImagePhoto.alt = item.name
-//   });
-  
-//   return cardElement;
-  
-// }
 
 function createElement(elementData) {
-  const card = new Card(item, cardTemplateSelector)
-  const cardElement = card(elementData) //новое
-  //const cardElement = createCard(elementData) //старое
+  // Создаем экземляр карточки
+  const cardTemplateSelector = '.element-template'
+  const card = new Card(elementData, cardTemplateSelector)
+  // Возвращаем DOM-элемент карточки
+  const cardElement = card.createCard()
+  // Добавляем карточку
   list.prepend(cardElement)
 }
-
 
 initialCards.forEach(createElement)
