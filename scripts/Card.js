@@ -4,17 +4,17 @@ import { openPopup } from './utils.js'
 
 export class Card {
   constructor(elementData, cardTemplateSelector) {
-    // console.log(elementData)
     this._name = elementData.name
     this._link = elementData.link
     this._template = document.querySelector(cardTemplateSelector).content
 
   }
   _deleteElement = () => {
-    this._card.remove()
+    this._card.remove();
+    this._element = null;
   };
 
-  _addLike = () => {
+  _toggleLike = () => {
     this._likeButton.classList.toggle('element__like_active');
   };
  
@@ -27,7 +27,7 @@ export class Card {
   };
 
   _setEventListeners() {
-    this._likeButton.addEventListener('click', this._addLike)
+    this._likeButton.addEventListener('click', this._toggleLike)
     this._deleteButton.addEventListener('click', this._deleteElement)
     this._elementImage.addEventListener('click', this._openImage)
   }

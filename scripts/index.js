@@ -64,14 +64,14 @@ const inputProfileTitle = document.querySelector('.popup__input_name_title')
 const inputProfileSubtitle = document.querySelector('.popup__input_name_subtitle')
 
 // Общее
-const list = document.querySelector('.elements')  
-const elementTemplate = document.querySelector('.element-template').content
-const popups =  document.querySelectorAll('.popup')
+const listCard = document.querySelector('.elements')  
+const cardTemplateSelector = '.element-template'
 
 // Фото места
 
-const editFormValidator = new FormValidator(validationConfig, profileEditModal)
-const addCardFormValidator = new FormValidator(validationConfig, cardAddModal)
+// Валидация форм
+const editFormValidator = new FormValidator(validationConfig, profileEditForm)
+const addCardFormValidator = new FormValidator(validationConfig, cardAddForm)
 editFormValidator.enableValidation()
 addCardFormValidator.enableValidation()
 
@@ -109,10 +109,11 @@ imageOpenModal.addEventListener('mousedown', closeImagePopupOverlay);
 
 // Открытие и закрытие попапа редактирования профайла
 profileEditButton.addEventListener('click', function() {
-  openPopup(profileEditModal)
-
   inputProfileTitle.value = profileTitle.textContent; 
   inputProfileSubtitle.value = profileSubtitle.textContent;
+
+  openPopup(profileEditModal)
+  toggleButton(profileEditForm, settings);
 })
 
 profileEditModalCloseButton .addEventListener('click', function() {
@@ -145,8 +146,9 @@ cardAddForm.addEventListener('submit', (event) => {
   closePopup(cardAddModal);
   
   cardAddForm.reset();
-    toggleButton(cardAddForm, settings);
+    this.toggleButton(cardAddForm, settings);
 })
+
 
 //Закрытие редактирования профиля по кнопке Сохранить
 profileEditForm.addEventListener('submit', (event) => {
@@ -160,12 +162,11 @@ profileEditForm.addEventListener('submit', (event) => {
 
 function createElement(elementData) {
   // Создаем экземляр карточки
-  const cardTemplateSelector = '.element-template'
   const card = new Card(elementData, cardTemplateSelector)
   // Возвращаем DOM-элемент карточки
   const cardElement = card.createCard()
   // Добавляем карточку
-  list.prepend(cardElement)
+  listCard.prepend(cardElement)
 }
 
 initialCards.forEach(createElement)
