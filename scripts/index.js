@@ -3,6 +3,12 @@ import { openPopup } from './utils.js'
 import { FormValidator } from './FormValidator.js'
 import { Card } from './Card.js'
 
+export function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup)
+  } 
+}
 
 const initialCards = [
   {
@@ -99,12 +105,7 @@ function closeImagePopupOverlay(event) {
 imageOpenModal.addEventListener('mousedown', closeImagePopupOverlay);
 
 //Закрытие попапа кнопкой Esc
-function closeByEscape(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup)
-  } 
-}
+
 
 // Открытие и закрытие попапа редактирования профайла
 profileEditButton.addEventListener('click', function() {
