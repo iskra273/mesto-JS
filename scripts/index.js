@@ -75,6 +75,7 @@ const addCardFormValidator = new FormValidator(validationConfig, cardAddForm)
 editFormValidator.enableValidation()
 addCardFormValidator.enableValidation()
 
+
 function closePopup(popups) {
   popups.classList.remove('popup_opened')
   document.removeEventListener('keydown', closeByEscape);
@@ -113,7 +114,7 @@ profileEditButton.addEventListener('click', function() {
   inputProfileSubtitle.value = profileSubtitle.textContent;
 
   openPopup(profileEditModal)
-  toggleButton(profileEditForm, settings);
+  // toggleButton(profileEditForm, settings);
 })
 
 profileEditModalCloseButton .addEventListener('click', function() {
@@ -123,6 +124,7 @@ profileEditModalCloseButton .addEventListener('click', function() {
 // Открытие и закрытие попапа добавления места
 cardAddButton.addEventListener('click', function() {
   openPopup(cardAddModal)
+  addCardFormValidator.disableSubmitButton() 
 })
 
 cardAddModalCloseButton.addEventListener('click', function() {
@@ -134,19 +136,18 @@ imageCloseButton.addEventListener('click', function() {
   closePopup(imageOpenModal)
 });
 
-
 //Закрытие редактирования карточки места по кнопке Сохранить
 cardAddForm.addEventListener('submit', (event) => {
   event.preventDefault()
   createElement({
     name: inputCardName.value,
-    link: inputCardLink.value
+    link: inputCardLink.value,
   });
 
   closePopup(cardAddModal);
   
   cardAddForm.reset();
-    this.toggleButton(cardAddForm, settings);
+  // toggleButton(cardAddForm, settings);
 })
 
 

@@ -4,6 +4,7 @@ import { openPopup } from './utils.js'
 
 export class Card {
   constructor(elementData, cardTemplateSelector) {
+    // console.log(elementData)
     this._name = elementData.name
     this._link = elementData.link
     this._template = document.querySelector(cardTemplateSelector).content

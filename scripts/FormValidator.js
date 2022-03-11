@@ -1,4 +1,3 @@
-
 export class FormValidator {
     constructor(settings, form) {
         this._form = form
@@ -24,27 +23,29 @@ export class FormValidator {
         errorContainer.textContent = '';
     }
 
-    toggleButton() {
+    _enableSubmitButton() {
         const {inactiveButtonClass} = this._settings;
+        this._button.classList.remove(inactiveButtonClass);
+        this._button.removeAttribute('disabled');
+    }
+
+    disableSubmitButton() {
+        const {inactiveButtonClass} = this._settings;
+        this._button.classList.add(inactiveButtonClass);
+        this._button.setAttribute('disabled', '');
+    }
+    
+    toggleButton() {
         const isFormValid = this._form.checkValidity();
         
         if (isFormValid) {
-            this._button.classList.remove(inactiveButtonClass);
-            this._button.removeAttribute('disabled');
+            this._enableSubmitButton();
     
         } else {
-            this._button.classList.add(inactiveButtonClass);
-            this._button.setAttribute('disabled', '');
+            this.disableSubmitButton();
         }
     }
-
-    disableButton() {
-        this._form.addEventListener('submit', (event) => {
-            event.preventDefault();
-        });
-        this.toggleButton()
-    }
-
+    
     _validateInput(input) {
         
         if (input.validity.valid) {
@@ -53,20 +54,21 @@ export class FormValidator {
         } else {
             this._showError(input, input.value);
         }
-    
+       
         this.toggleButton();
     }
 
     enableValidation() {
         this._form.addEventListener('submit', (event) => {
             event.preventDefault();
+             
         });
-        
+         
         this._inputs.forEach(input => {
             input.addEventListener('input', () => {
                 this._validateInput(input);
             });
-        });        
-        
+            
+        });
     } 
 }
