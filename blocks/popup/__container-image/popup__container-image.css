@@ -3,10 +3,3 @@
     padding: 0;
     position: relative;
 }
-
-@media screen and (max-width: 540px) {
-	.popup__container-image {
-        max-width: 240px;
-        height: 321px;
-    }
-}

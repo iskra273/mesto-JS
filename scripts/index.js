@@ -89,7 +89,6 @@ function closeProfilePopupOverlay(event) {
 
 profileEditModal.addEventListener('click', closeProfilePopupOverlay);
 
-
 function closeAddPopupOverlay(event) {
   if (event.target === event.currentTarget)
   closePopup(cardAddModal)
@@ -112,22 +111,25 @@ imageOpenModal.addEventListener('mousedown', closeImagePopupOverlay);
 profileEditButton.addEventListener('click', function() {
   inputProfileTitle.value = profileTitle.textContent; 
   inputProfileSubtitle.value = profileSubtitle.textContent;
-
-  openPopup(profileEditModal)
-  // toggleButton(profileEditForm, settings);
+  editFormValidator.toggleButton()
+  openPopup(profileEditModal);
+  
 })
 
-profileEditModalCloseButton .addEventListener('click', function() {
+profileEditModalCloseButton.addEventListener('click', function() {
+  editFormValidator.toggleButton()
   closePopup(profileEditModal)
+  
 })
   
 // Открытие и закрытие попапа добавления места
 cardAddButton.addEventListener('click', function() {
+  addCardFormValidator.toggleButton()
   openPopup(cardAddModal)
-  addCardFormValidator.disableSubmitButton() 
 })
 
 cardAddModalCloseButton.addEventListener('click', function() {
+  addCardFormValidator.toggleButton()
   closePopup(cardAddModal)
 })
   
@@ -147,7 +149,7 @@ cardAddForm.addEventListener('submit', (event) => {
   closePopup(cardAddModal);
   
   cardAddForm.reset();
-  // toggleButton(cardAddForm, settings);
+  addCardFormValidator.toggleButton()
 })
 
 
@@ -155,19 +157,28 @@ cardAddForm.addEventListener('submit', (event) => {
 profileEditForm.addEventListener('submit', (event) => {
   event.preventDefault()
   
-  profileTitle.textContent = inputProfileTitle.value
-  profileSubtitle.textContent = inputProfileSubtitle.value
-  closePopup(profileEditModal)
+  profileTitle.textContent = inputProfileTitle.value;
+  profileSubtitle.textContent = inputProfileSubtitle.value;
+  
+  closePopup(profileEditModal);
 })
 
 
 function createElement(elementData) {
-  // Создаем экземляр карточки
   const card = new Card(elementData, cardTemplateSelector)
-  // Возвращаем DOM-элемент карточки
   const cardElement = card.createCard()
-  // Добавляем карточку
   listCard.prepend(cardElement)
 }
+
+// function createElement(elementData) {
+//   const card = new Card(elementData, cardTemplateSelector)
+//   const cardElement = card.createCard()
+//   return cardElement
+// }
+
+// function createCardElement(cardElement) {
+//   createElement(cardElement)
+//   listCard.prepend(cardElement)
+// }
 
 initialCards.forEach(createElement)
