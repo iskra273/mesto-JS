@@ -141,7 +141,7 @@ imageCloseButton.addEventListener('click', function() {
 //Закрытие редактирования карточки места по кнопке Сохранить
 cardAddForm.addEventListener('submit', (event) => {
   event.preventDefault()
-  createElement({
+  createCardElement({
     name: inputCardName.value,
     link: inputCardLink.value,
   });
@@ -167,18 +167,12 @@ profileEditForm.addEventListener('submit', (event) => {
 function createElement(elementData) {
   const card = new Card(elementData, cardTemplateSelector)
   const cardElement = card.createCard()
-  listCard.prepend(cardElement)
+  return cardElement
 }
 
-// function createElement(elementData) {
-//   const card = new Card(elementData, cardTemplateSelector)
-//   const cardElement = card.createCard()
-//   return cardElement
-// }
+function createCardElement(cardElement) {
+  const cardElementNew = createElement(cardElement)
+  listCard.prepend(cardElementNew)
+}
 
-// function createCardElement(cardElement) {
-//   createElement(cardElement)
-//   listCard.prepend(cardElement)
-// }
-
-initialCards.forEach(createElement)
+initialCards.forEach(createCardElement)
