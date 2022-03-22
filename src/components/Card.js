@@ -1,15 +1,15 @@
-import { imageOpenModal, popupImagePhoto, popupImageCaption } from './constants.js'
-import { openPopup } from './utils.js'
-
+import { imageOpenModal, popupImagePhoto, popupImageCaption } from '../utils/constants.js'
+// import { openPopup } from '../utils/utils.js'
+import { handleCardClick } from '../pages/index.js'
 
 export class Card {
   constructor(elementData, cardTemplateSelector) {
-    // console.log(elementData)
-    this._name = elementData.name
-    this._link = elementData.link
-    this._template = document.querySelector(cardTemplateSelector).content
-
+    this._name = elementData.name;
+    this._link = elementData.link;
+    this._template = document.querySelector(cardTemplateSelector).content;
+    this._handleCardClick = handleCardClick;
   }
+
   _deleteElement = () => {
     this._cardElement.remove();
     this._element = null;
@@ -18,13 +18,9 @@ export class Card {
   _toggleLike = () => {
     this._likeButton.classList.toggle('element__like_active');
   };
- 
+  
   _openImage = () => {
-    openPopup(imageOpenModal)
-    
-    popupImagePhoto.src = this._link
-    popupImageCaption.textContent = this._name
-    popupImagePhoto.alt = this._name
+    this._handleCardClick(this._name, this._link)
   };
 
   _setEventListeners() {
@@ -54,3 +50,5 @@ export class Card {
   }
 
 };
+
+

@@ -15,3 +15,9 @@
     align-items: start;
     text-align: left;
 }
+
+@media screen and (max-width: 540px) {
+	.popup__error_visible {
+        width: 238px;
+    }
+}
