@@ -69,8 +69,6 @@ const listCard = document.querySelector('.elements')
 const cardTemplateSelector = '.element-template'
 // const popupSelector =  document.querySelector('.popup')
 
-// Фото места
-
 // Валидация форм
 const editFormValidator = new FormValidator(validationConfig, profileEditForm)
 const addCardFormValidator = new FormValidator(validationConfig, cardAddForm)
@@ -80,7 +78,7 @@ addCardFormValidator.enableValidation()
 //Закрытие попапа по клику фона
 function closeProfilePopupOverlay(event) {
   if (event.target === event.currentTarget)
-    popupEditProfileNew.close(profileEditModal);
+  profileEditFormNew.close(profileEditModal);
 }
 
 profileEditModal.addEventListener('click', closeProfilePopupOverlay);
@@ -92,7 +90,6 @@ function closeAddPopupOverlay(event) {
 
 cardAddModal.addEventListener('click', closeAddPopupOverlay);
 
-
 function closeImagePopupOverlay(event) {
   if (event.target === event.currentTarget)
   popupImage.close(imageOpenModal)
@@ -100,40 +97,58 @@ function closeImagePopupOverlay(event) {
     
 imageOpenModal.addEventListener('mousedown', closeImagePopupOverlay);
 
-// // Открытие и закрытие попапа редактирования профайла
-// profileEditButton.addEventListener('click', function() {
-//   // inputProfileTitle.value = profileTitle.textContent; 
-//   // inputProfileSubtitle.value = profileSubtitle.textContent;
-//   userInfo.getUserInfo()
-//   console.log(userInfo.getUserInfo())
-//   editFormValidator.toggleButton()
-//   popupProfile.open(profileEditModal);
-//   // popupEditProfileNew.open();
-// })
-
-profileEditModalCloseButton.addEventListener('click', function() {
-  editFormValidator.toggleButton()
-  popupEditProfileNew.close(profileEditModal);
-})
-  
-// Открытие и закрытие попапа добавления места
-cardAddButton.addEventListener('click', function() {
-  addCardFormValidator.toggleButton()
-  popupAddCardNew.open(cardAddModal);
-})
-
-
-cardAddModalCloseButton.addEventListener('click', function() {
-  addCardFormValidator.toggleButton()
-  popupAddCardNew.close(cardAddModal);
-})
-  
 // Закрытие попапа фото места
 imageCloseButton.addEventListener('click', function() {
   popupImage.close(imageOpenModal)
 });
 
-//Закрытие редактирования карточки места по кнопке Сохранить
+// Открытие попапа редактирования профайла
+profileEditButton.addEventListener('click', function() {
+  
+  // inputProfileTitle.value = profileTitle.textContent; 
+  // inputProfileSubtitle.value = profileSubtitle.textContent;
+
+  
+  inputProfileTitle.value = userInfoValues.profileTitle;
+  inputProfileSubtitle.value = userInfoValues.profileSubtitle;
+  
+  editFormValidator.toggleButton()
+  profileEditFormNew.open(profileEditModal);
+})
+
+//Закрытие попапа редактирования профайла
+profileEditModalCloseButton.addEventListener('click', function() {
+  editFormValidator.toggleButton()
+  profileEditFormNew.close(profileEditModal);
+})
+  
+// Открытие попапа добавления места
+cardAddButton.addEventListener('click', function() {
+  addCardFormValidator.toggleButton()
+  popupAddCardNew.open(cardAddModal);
+})
+
+//Закрытие попапа добавления места
+cardAddModalCloseButton.addEventListener('click', function() {
+  addCardFormValidator.toggleButton()
+  popupAddCardNew.close(cardAddModal);
+})
+ 
+//Закрытие редактирования профиля по кнопке Сохранить
+profileEditForm.addEventListener('submit', (event) => {
+  event.preventDefault()
+  
+  // profileTitle.textContent = inputProfileTitle.value;
+  // profileSubtitle.textContent = inputProfileSubtitle.value;
+
+  profileEditFormNew.setEventListeners()
+  userInfoValuesNew.profileTitle = inputProfileTitle.value
+  userInfoValuesNew.profileSubtitle = inputProfileSubtitle.value
+
+  profileEditFormNew.close(profileEditModal);
+})
+
+// Закрытие редактирования карточки места по кнопке Сохранить
 cardAddForm.addEventListener('submit', (event) => {
   event.preventDefault()
   createCardElement({
@@ -141,36 +156,10 @@ cardAddForm.addEventListener('submit', (event) => {
     link: inputCardLink.value,
   });
 
-  // cardAddForm.reset();
+  cardAddForm.reset();
   popupAddCardNew.close(cardAddModal);
   addCardFormValidator.toggleButton()
 })
-
-
-//Закрытие редактирования профиля по кнопке Сохранить
-profileEditForm.addEventListener('submit', (event) => {
-  event.preventDefault()
-  // profileTitle.textContent = inputProfileTitle.value;
-  // profileSubtitle.textContent = inputProfileSubtitle.value;
-
-  // userInfo.setUserInfo()
-
-  popupEditProfileNew.close(profileEditModal);
-})
-
-const popupImage = new PopupWithImage ('.popup_type_image-element');
-popupImage.open();
-popupImage.close();
-
-const cardList = new Section({ 
-  items: initialCards,
-  renderer: (item) => {
-    createCardElement(item)
-  } 
-}, cardTemplateSelector);
-
-cardList.renderer()
-cardList.addItem()
 
 function createElement(elementData) {
   const card = new Card(elementData, cardTemplateSelector, handleCardClick)
@@ -184,46 +173,49 @@ function createCardElement(cardElement) {
 }
 
 
+const cardList = new Section({ 
+  items: initialCards,
+  renderer: (item) => {
+    createCardElement(item)
+  } 
+}, cardTemplateSelector);
+
+cardList.renderer()
+cardList.addItem()
+
+
 const userInfo = new UserInfo({
   profileTitleSelector: '.profile__info-title',
   profileSubtitleSelector: '.profile__info-subtitle',
 });
 
-userInfo.getUserInfo()
+const userInfoValues = userInfo.getUserInfo();
+const userInfoValuesNew = userInfo.setUserInfo();
+// console.log(userInfoValues)
 
+const popupImage = new PopupWithImage ('.popup_type_image-element');
+popupImage.open();
+popupImage.close();
 
 const profileEditFormNew = new PopupWithForm({
   popupSelector:'.popup_type_edit', 
   handleFormSubmit: () => {
-    // userInfo.getUserInfo();
-    profileEditFormNew.open(profileEditModal);
   } 
 })
 
-
 profileEditFormNew.open()
-// profileEditFormNew.close()
+profileEditFormNew.close()
+profileEditFormNew.setEventListeners()
 
 const popupAddCardNew = new PopupWithForm({
   popupSelector:'.popup_type_add-element', 
   handleFormSubmit: () =>{
-    createCardElement({
-      name: inputCardName.value,
-      link: inputCardLink.value,
-    });
   }
 })
 
 popupAddCardNew.open()
-// popupAddCardNew.close()
-profileEditModal.setEventListeners()
+popupAddCardNew.close()
+popupAddCardNew.setEventListeners()
 
 
-// Открытие и закрытие попапа редактирования профайла
-profileEditButton.addEventListener('click', function() {
-  userInfo.getUserInfo()
-  editFormValidator.toggleButton()
-  // popupProfile.open(profileEditModal);
-  profileEditFormNew.open(profileEditModal);
-})
 

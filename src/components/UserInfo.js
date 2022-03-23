@@ -4,7 +4,6 @@ export class UserInfo {
         this._profileSubtitle = document.querySelector(profileSubtitleSelector);
     }
 
-    //подставляем в форму при открытии, забираем со страницы
     getUserInfo() {
         this._userInfo = {};
         this._userInfo.profileTitle = this._profileTitle.textContent;
@@ -12,12 +11,11 @@ export class UserInfo {
         return this._userInfo;
     }
     
-    //принимает новые данные пользователя (получает объект), добавляет их на страницу
     setUserInfo() {
         this._profileTitle.textContent = this._profileTitle.value
         this._profileSubtitle.textContent = this._profileSubtitle.value
-    };
-    
+    };  
 }
 
-
+// profileTitle.textContent = inputProfileTitle.value;
+  // profileSubtitle.textContent = inputProfileSubtitle.value;
