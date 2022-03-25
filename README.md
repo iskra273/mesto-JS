@@ -22,4 +22,4 @@
 
 **Ссылка на проект**
 
-* [Ссылка на проект в Github](https://iskra273.github.io/mesto-JS/)
+* [Ссылка на проект в Github](https://github.com/iskra273/mesto-JS.git)
