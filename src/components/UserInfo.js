@@ -11,11 +11,9 @@ export class UserInfo {
         return this._userInfo;
     }
     
-    setUserInfo() {
-        this._profileTitle.textContent = this._profileTitle.value
-        this._profileSubtitle.textContent = this._profileSubtitle.value
-    };  
-}
+    setUserInfo(data) {
+        this._profileTitle.textContent = data.title
+        this._profileSubtitle.textContent = data.subtitle
+    }; 
 
-// profileTitle.textContent = inputProfileTitle.value;
-  // profileSubtitle.textContent = inputProfileSubtitle.value;
+}

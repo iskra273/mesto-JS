@@ -2,7 +2,6 @@ import { validationConfig, imageOpenModal, popupImagePhoto, popupImageCaption } 
 import { FormValidator } from '../components/FormValidator.js'
 import { Card } from '../components/Card.js'
 import { Section } from '../components/Section.js'
-// import { Popup } from '../components/Popup.js'
 import { PopupWithForm } from '../components/PopupWithForm.js'
 import { PopupWithImage } from '../components/PopupWithImage.js'
 import { UserInfo } from '../components/UserInfo.js'
@@ -105,13 +104,9 @@ imageCloseButton.addEventListener('click', function() {
 // Открытие попапа редактирования профайла
 profileEditButton.addEventListener('click', function() {
   
-  // inputProfileTitle.value = profileTitle.textContent; 
-  // inputProfileSubtitle.value = profileSubtitle.textContent;
-
-  
   inputProfileTitle.value = userInfoValues.profileTitle;
   inputProfileSubtitle.value = userInfoValues.profileSubtitle;
-  
+
   editFormValidator.toggleButton()
   profileEditFormNew.open(profileEditModal);
 })
@@ -134,32 +129,7 @@ cardAddModalCloseButton.addEventListener('click', function() {
   popupAddCardNew.close(cardAddModal);
 })
  
-//Закрытие редактирования профиля по кнопке Сохранить
-profileEditForm.addEventListener('submit', (event) => {
-  event.preventDefault()
-  
-  // profileTitle.textContent = inputProfileTitle.value;
-  // profileSubtitle.textContent = inputProfileSubtitle.value;
 
-  profileEditFormNew.setEventListeners()
-  userInfoValuesNew.profileTitle = inputProfileTitle.value
-  userInfoValuesNew.profileSubtitle = inputProfileSubtitle.value
-
-  profileEditFormNew.close(profileEditModal);
-})
-
-// Закрытие редактирования карточки места по кнопке Сохранить
-cardAddForm.addEventListener('submit', (event) => {
-  event.preventDefault()
-  createCardElement({
-    name: inputCardName.value,
-    link: inputCardLink.value,
-  });
-
-  cardAddForm.reset();
-  popupAddCardNew.close(cardAddModal);
-  addCardFormValidator.toggleButton()
-})
 
 function createElement(elementData) {
   const card = new Card(elementData, cardTemplateSelector, handleCardClick)
@@ -190,16 +160,17 @@ const userInfo = new UserInfo({
 });
 
 const userInfoValues = userInfo.getUserInfo();
-const userInfoValuesNew = userInfo.setUserInfo();
-// console.log(userInfoValues)
 
 const popupImage = new PopupWithImage ('.popup_type_image-element');
 popupImage.open();
 popupImage.close();
 
+
 const profileEditFormNew = new PopupWithForm({
   popupSelector:'.popup_type_edit', 
-  handleFormSubmit: () => {
+  handleFormSubmit: (data) => {
+    userInfo.setUserInfo(data)
+    profileEditFormNew.close()
   } 
 })
 
@@ -207,11 +178,22 @@ profileEditFormNew.open()
 profileEditFormNew.close()
 profileEditFormNew.setEventListeners()
 
+
 const popupAddCardNew = new PopupWithForm({
   popupSelector:'.popup_type_add-element', 
-  handleFormSubmit: () =>{
+  handleFormSubmit: (data) => {
+    
+    
+    createElement(data)
+    createCardElement(data) 
+    cardList.addItem(data) 
+    
+    cardAddForm.reset();
+    popupAddCardNew.close(cardAddModal);
+    addCardFormValidator.toggleButton()
   }
 })
+
 
 popupAddCardNew.open()
 popupAddCardNew.close()
