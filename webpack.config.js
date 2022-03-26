@@ -3,11 +3,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-
 module.exports = {
     mode: 'development',
     entry: {
         main: './src/pages/index.js'
+    },
+    stats: {
+        children: true
     },
     output: {
         filename: 'main.js',
@@ -28,18 +30,8 @@ module.exports = {
                 exclude: '/node_modules/'
             },
             {
-                test: /\.(woff(2)?|eot|ttf|otf)$/,
-                type: 'asset/resource',
-                generator: {
-                    filename: 'fonts/[name].[hash][ext]',
-                }
-            },
-            {
-                test: /\.(png|svg|jpg|jpeg|gif)$/,
-                type: 'asset/resource',
-                generator: {
-                    filename: 'images/[name].[hash][ext]',
-                }
+                test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
+                type: 'asset/resource'
             },
             {
                 test: /\.css$/,
@@ -49,7 +41,7 @@ module.exports = {
                         loader: 'css-loader',
                         options: {
                             importLoaders: 1
-                        }
+                        }   
                     },
                     'postcss-loader'
                 ]
@@ -57,10 +49,10 @@ module.exports = {
         ]
     },
     plugins: [
-      new HtmlWebpackPlugin({
-          template: './src/index.html'
-      }),
-      new CleanWebpackPlugin(),
-      new MiniCssExtractPlugin(), 
+        new HtmlWebpackPlugin({
+            template: './src/index.html'
+        }),
+        new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin(),
     ]
-};
+}; 
