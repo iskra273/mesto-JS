@@ -1,11 +1,11 @@
-import { validationConfig, imageOpenModal, popupImagePhoto, popupImageCaption } from '../utils/constants.js'
-import { FormValidator } from '../components/FormValidator.js'
-import { Card } from '../components/Card.js'
-import { Section } from '../components/Section.js'
-import { PopupWithForm } from '../components/PopupWithForm.js'
-import { PopupWithImage } from '../components/PopupWithImage.js'
-import { UserInfo } from '../components/UserInfo.js'
-
+import { validationConfig, imageOpenModal } from '../utils/constants.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { Card } from '../components/Card.js';
+import { Section } from '../components/Section.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { UserInfo } from '../components/UserInfo.js';
+import '../pages/index.css';
 
 export function handleCardClick(name, link) {
   popupImage.open(name, link)
@@ -66,7 +66,7 @@ const inputProfileSubtitle = document.querySelector('.popup__input_name_subtitle
 // Общее
 const listCard = document.querySelector('.elements')  
 const cardTemplateSelector = '.element-template'
-// const popupSelector =  document.querySelector('.popup')
+//const popupSelector =  document.querySelector('.popup')
 
 // Валидация форм
 const editFormValidator = new FormValidator(validationConfig, profileEditForm)
@@ -104,9 +104,10 @@ imageCloseButton.addEventListener('click', function() {
 // Открытие попапа редактирования профайла
 profileEditButton.addEventListener('click', function() {
   
+  const userInfoValues = userInfo.getUserInfo();
   inputProfileTitle.value = userInfoValues.profileTitle;
   inputProfileSubtitle.value = userInfoValues.profileSubtitle;
-
+  
   editFormValidator.toggleButton()
   profileEditFormNew.open(profileEditModal);
 })
@@ -129,7 +130,6 @@ cardAddModalCloseButton.addEventListener('click', function() {
   popupAddCardNew.close(cardAddModal);
 })
  
-
 
 function createElement(elementData) {
   const card = new Card(elementData, cardTemplateSelector, handleCardClick)
@@ -159,7 +159,7 @@ const userInfo = new UserInfo({
   profileSubtitleSelector: '.profile__info-subtitle',
 });
 
-const userInfoValues = userInfo.getUserInfo();
+userInfo.getUserInfo();
 
 const popupImage = new PopupWithImage ('.popup_type_image-element');
 popupImage.open();
@@ -181,9 +181,8 @@ profileEditFormNew.setEventListeners()
 
 const popupAddCardNew = new PopupWithForm({
   popupSelector:'.popup_type_add-element', 
-  handleFormSubmit: (data) => {
-    
-    
+  handleFormSubmit: (data) => {   
+      
     createElement(data)
     createCardElement(data) 
     cardList.addItem(data) 

@@ -1,5 +1,3 @@
-import { imageOpenModal, popupImagePhoto, popupImageCaption } from '../utils/constants.js'
-// import { openPopup } from '../utils/utils.js'
 import { handleCardClick } from '../pages/index.js'
 
 export class Card {
@@ -37,12 +35,10 @@ export class Card {
 
   createCard () {
     this._cardElement = this._template.querySelector('.element').cloneNode(true);
-    // this._cardElement = this._template.cloneNode(true)
     this._elementImage = this._cardElement.querySelector('.element__image')
     this._elementName = this._cardElement.querySelector('.element__name')
     this._deleteButton = this._cardElement.querySelector('.element__delete')
     this._likeButton = this._cardElement.querySelector('.element__like')
-    // this._card = this._cardElement.querySelector('.element')
         
     this._fillCard()       
     this._setEventListeners()    

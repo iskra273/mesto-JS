@@ -1,4 +1,3 @@
-
 // отрисовывает элементы на странице, у класса нет своей разметки - он получает разметку через функцию колбэк и вставляет ее в контейнер
 export class Section {
   constructor({items, renderer}, containerSelector) {
