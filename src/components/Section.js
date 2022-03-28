@@ -4,8 +4,7 @@ export class Section {
     this._initialCards = items;
     this._container = document.querySelector(containerSelector);
     this._renderer = renderer;
-    this._cardTemplateSelector = 'element-template'
-    }
+  }
 
   // принимает DOM-элемент и добавляет его в контейнер
   addItem(element) {

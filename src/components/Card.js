@@ -1,9 +1,8 @@
-import { handleCardClick } from '../pages/index.js'
-
 export class Card {
-  constructor(elementData, cardTemplateSelector) {
+  constructor(elementData, cardTemplateSelector, handleCardClick) {
     this._name = elementData.name;
     this._link = elementData.link;
+    // this._cardElement = document.querySelector(cardTemplateSelector);
     this._template = document.querySelector(cardTemplateSelector).content;
     this._handleCardClick = handleCardClick;
   }
@@ -33,7 +32,17 @@ export class Card {
     this._elementImage.alt = this._name  
   }
 
+  _getTemplate() {
+    const cardElement = document
+      .querySelector(cardTemplateSelector)
+      .content
+      .querySelector('.element')
+      .cloneNode(true);
+    return cardElement;
+  }
+
   createCard () {
+    // this._cardElement = this._getTemplate();
     this._cardElement = this._template.querySelector('.element').cloneNode(true);
     this._elementImage = this._cardElement.querySelector('.element__image')
     this._elementName = this._cardElement.querySelector('.element__name')
