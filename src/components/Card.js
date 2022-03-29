@@ -2,8 +2,6 @@ export class Card {
   constructor(elementData, cardTemplateSelector, handleCardClick) {
     this._name = elementData.name;
     this._link = elementData.link;
-    // this._cardElement = document.querySelector(cardTemplateSelector);
-    this._template = document.querySelector(cardTemplateSelector).content;
     this._handleCardClick = handleCardClick;
   }
 
@@ -34,7 +32,7 @@ export class Card {
 
   _getTemplate() {
     const cardElement = document
-      .querySelector(cardTemplateSelector)
+      .querySelector('.element-template')
       .content
       .querySelector('.element')
       .cloneNode(true);
@@ -42,8 +40,7 @@ export class Card {
   }
 
   createCard () {
-    // this._cardElement = this._getTemplate();
-    this._cardElement = this._template.querySelector('.element').cloneNode(true);
+    this._cardElement = this._getTemplate();
     this._elementImage = this._cardElement.querySelector('.element__image')
     this._elementName = this._cardElement.querySelector('.element__name')
     this._deleteButton = this._cardElement.querySelector('.element__delete')
