@@ -11,7 +11,12 @@ export class Popup {
     };
      
     close() {
-        this._popup.classList.remove('popup_opened')
+        this._popup.classList.remove('popup_opened');
+        this._popup.removeEventListener('click', (event) => {
+            if (event.target.classList.contains('popup_opened') || event.target.classList.contains('popup__close')) {
+            this.close()
+          }
+        })
     };
 
     _handleEscClose(event) {
