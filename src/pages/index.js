@@ -1,6 +1,6 @@
 import { validationConfig, imageOpenModal, profileEditModal, cardAddModal, profileEditForm, 
   cardAddForm, profileEditButton, profileEditModalCloseButton, cardAddButton, 
-  cardAddModalCloseButton, imageCloseButton, listCard, cardTemplateSelector
+  cardAddModalCloseButton, imageCloseButton, listCard, cardTemplateSelector, containerSelector
 } from '../utils/constants.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Card } from '../components/Card.js';
@@ -40,9 +40,9 @@ export const initialCards = [
 
 // Валидация форм
 const formEditValidator = new FormValidator(validationConfig, profileEditForm)
-const addCardFormValidator = new FormValidator(validationConfig, cardAddForm)
+const сardAddFormValidator = new FormValidator(validationConfig, cardAddForm)
 formEditValidator.enableValidation()
-addCardFormValidator.enableValidation()
+сardAddFormValidator.enableValidation()
 
 //Открытие попапа фото
 function handleCardClick(name, link) {
@@ -58,7 +58,7 @@ profileEditButton.addEventListener('click', function() {
 
 // Открытие попапа добавления места
 cardAddButton.addEventListener('click', function() {
-  addCardFormValidator.toggleButton()
+  сardAddFormValidator.toggleButton()
   popupAddCardNew.open();
 })
 
@@ -72,9 +72,8 @@ function createElement(elementData) {
 
 function createCardElement(cardElement) {
   const cardElementNew = createElement(cardElement)
-  listCard.prepend(cardElementNew)
-  // cardList.addItem(cardElementNew)
-  
+  // listCard.prepend(cardElementNew)
+  cardList.addItem(cardElementNew) 
 }
 
 const cardList = new Section({ 
@@ -85,14 +84,12 @@ const cardList = new Section({
 }, cardTemplateSelector);
 
 cardList.renderer()
-// cardList.addItem()
 
 const userInfo = new UserInfo({
   profileTitleSelector: '.profile__info-title',
   profileSubtitleSelector: '.profile__info-subtitle',
 });
 
-// userInfo.getUserInfo();
 
 const popupImage = new PopupWithImage ('.popup_type_image-element');
 popupImage.setEventListeners();
@@ -114,10 +111,7 @@ const popupAddCardNew = new PopupWithForm({
       
     createCardElement(data)
     cardList.addItem(data) 
-    
-    cardAddForm.reset();
     popupAddCardNew.close();
-    addCardFormValidator.toggleButton()
   }
 })
 
