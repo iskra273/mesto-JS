@@ -1,6 +1,6 @@
 .popup__error_visible {
     width: 358px;
-    height: 14px;
+    min-height: 30px;
     margin: 0 auto;
     margin-top: 5px;
     padding: 0;

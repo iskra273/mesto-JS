@@ -39,9 +39,9 @@ export const initialCards = [
 
 
 // Валидация форм
-const editFormValidator = new FormValidator(validationConfig, profileEditForm)
+const formEditValidator = new FormValidator(validationConfig, profileEditForm)
 const addCardFormValidator = new FormValidator(validationConfig, cardAddForm)
-editFormValidator.enableValidation()
+formEditValidator.enableValidation()
 addCardFormValidator.enableValidation()
 
 //Открытие попапа фото
@@ -49,37 +49,19 @@ function handleCardClick(name, link) {
   popupImage.open(name, link)
 }
 
-// Закрытие попапа фото места
-imageCloseButton.addEventListener('click', function() {
-  popupImage.close(imageOpenModal)
-});
-
-
 // Открытие попапа редактирования профайла
 profileEditButton.addEventListener('click', function() {
   userInfo.getUserInfo();
-  editFormValidator.toggleButton()
-  profileEditFormNew.open(profileEditModal);
+  formEditValidator.toggleButton()
+  profileEditFormNew.open();
 })
 
-// Закрытие попапа редактирования профайла
-profileEditModalCloseButton.addEventListener('click', function() {
-  editFormValidator.toggleButton();
-  profileEditFormNew.close(profileEditModal);
-})
-  
 // Открытие попапа добавления места
 cardAddButton.addEventListener('click', function() {
   addCardFormValidator.toggleButton()
-  popupAddCardNew.open(cardAddModal);
+  popupAddCardNew.open();
 })
 
-// Закрытие попапа добавления места
-cardAddModalCloseButton.addEventListener('click', function() {
-  addCardFormValidator.toggleButton();
-  popupAddCardNew.close(cardAddModal);
-  
-})
  
 // Создание карточки
 function createElement(elementData) {
@@ -91,6 +73,8 @@ function createElement(elementData) {
 function createCardElement(cardElement) {
   const cardElementNew = createElement(cardElement)
   listCard.prepend(cardElementNew)
+  // cardList.addItem(cardElementNew)
+  
 }
 
 const cardList = new Section({ 
@@ -101,18 +85,16 @@ const cardList = new Section({
 }, cardTemplateSelector);
 
 cardList.renderer()
-cardList.addItem()
+// cardList.addItem()
 
 const userInfo = new UserInfo({
   profileTitleSelector: '.profile__info-title',
   profileSubtitleSelector: '.profile__info-subtitle',
 });
 
-userInfo.getUserInfo();
+// userInfo.getUserInfo();
 
 const popupImage = new PopupWithImage ('.popup_type_image-element');
-popupImage.open();
-popupImage.close();
 popupImage.setEventListeners();
 
 const profileEditFormNew = new PopupWithForm({
@@ -130,12 +112,11 @@ const popupAddCardNew = new PopupWithForm({
   popupSelector:'.popup_type_add-element', 
   handleFormSubmit: (data) => {   
       
-    createElement(data)
-    createCardElement(data) 
+    createCardElement(data)
     cardList.addItem(data) 
     
     cardAddForm.reset();
-    popupAddCardNew.close(cardAddModal);
+    popupAddCardNew.close();
     addCardFormValidator.toggleButton()
   }
 })
