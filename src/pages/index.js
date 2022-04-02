@@ -1,6 +1,5 @@
-import { validationConfig, imageOpenModal, profileEditModal, cardAddModal, profileEditForm, 
-  cardAddForm, profileEditButton, profileEditModalCloseButton, cardAddButton, 
-  cardAddModalCloseButton, imageCloseButton, listCard, cardTemplateSelector, containerSelector
+import { validationConfig, profileEditForm, cardAddForm, profileEditButton, 
+  cardAddButton, cardTemplateSelector, containerSelector
 } from '../utils/constants.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Card } from '../components/Card.js';
@@ -72,7 +71,6 @@ function createElement(elementData) {
 
 function createCardElement(cardElement) {
   const cardElementNew = createElement(cardElement)
-  // listCard.prepend(cardElementNew)
   cardList.addItem(cardElementNew) 
 }
 
@@ -81,7 +79,7 @@ const cardList = new Section({
   renderer: (item) => {
     createCardElement(item)
   } 
-}, cardTemplateSelector);
+}, containerSelector);
 
 cardList.renderer()
 
@@ -108,9 +106,9 @@ profileEditFormNew.setEventListeners()
 const popupAddCardNew = new PopupWithForm({
   popupSelector:'.popup_type_add-element', 
   handleFormSubmit: (data) => {   
-      
-    createCardElement(data)
-    cardList.addItem(data) 
+    
+    const cardElementAdd = createElement(data);    
+    cardList.addItem(cardElementAdd); 
     popupAddCardNew.close();
   }
 })

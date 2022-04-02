@@ -29,6 +29,6 @@ export const cardAddModalCloseButton = cardAddModal.querySelector('.popup__close
 export const imageCloseButton = imageOpenModal.querySelector('.popup__close');
 
 // Общее
-// export const containerSelector = document.querySelector('.elements')
-export const listCard = document.querySelector('.elements')  
+export const containerSelector = '.elements'
+// export const listCard = document.querySelector('.elements')  
 export const cardTemplateSelector = '.element-template'

@@ -1,23 +1,4 @@
 .popup__error_visible {
-    width: 358px;
-    min-height: 30px;
-    margin: 0 auto;
-    margin-top: 5px;
-    padding: 0;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 15px;
-    color: #ff0000;
+    display: flex;
     opacity: 1;
-    justify-content: start;
-    align-items: start;
-    text-align: left;
-}
-
-@media screen and (max-width: 540px) {
-	.popup__error_visible {
-        width: 238px;
-    }
 }
