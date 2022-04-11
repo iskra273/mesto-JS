@@ -1,4 +1,4 @@
-import { validationConfig, profileEditForm, cardAddForm, profileEditButton, 
+import { validationConfig, profileEditForm, cardAddForm, avatarEditForm, profileEditButton, 
   cardAddButton, avatarEditButton, cardTemplateSelector, containerSelector, inputProfileTitle, inputProfileSubtitle
 } from '../utils/constants.js';
 import { FormValidator } from '../components/FormValidator.js';
@@ -16,8 +16,7 @@ let userId
 api.getProfile()
   .then(res => {
     // console.log('ответ', res)
-    userInfo.setUserInfo(res.name, res.about)
-
+    userInfo.setUserInfo(res.name, res.about, res.avatar)
     userId = res._id
   })
 
@@ -71,8 +70,10 @@ export const initialCards = [
 // Валидация форм
 const formEditValidator = new FormValidator(validationConfig, profileEditForm)
 const сardAddFormValidator = new FormValidator(validationConfig, cardAddForm)
+const avatarEditFormValidator = new FormValidator(validationConfig, avatarEditForm)
 formEditValidator.enableValidation()
 сardAddFormValidator.enableValidation()
+avatarEditFormValidator.enableValidation()
 
 // Открытие попапа фото
 function handleCardClick(name, link) {
@@ -80,9 +81,10 @@ function handleCardClick(name, link) {
 }
 
 // Открытие попапа редактирования   аватара
-// avatarEditButton.addEventListener('click', function() {
-//   avatarPopup.open();
-// })
+avatarEditButton.addEventListener('click', function() {
+  avatarEditFormValidator.toggleButton()
+  avatarPopup.open();
+})
 
 // Открытие попапа редактирования профайла
 profileEditButton.addEventListener('click', function() {
@@ -206,25 +208,21 @@ const confirmPopup = new PopupWithForm({
 
 confirmPopup.setEventListeners()
 
-// const avatarPopup = new PopupWithForm({
-//   popupSelector:'.popup_type_avatar',
-//   handleFormSubmit: (data) => {
-//     // const {title, subtitle, avatar} = data
-//     api.updateAvatar(data)
-//       .then(res => {
-//         // console.log('res', res)
-//         console.log('ответ', res)
-//         // userInfo.setUserAvatar(res)
-//         avatarPopup.close()
-//       })
-//   }
-// })
+const avatarPopup = new PopupWithForm({
+  popupSelector:'.popup_type_avatar',
+  handleFormSubmit: (data) => {
+    console.log(data)
+    const {link} = data
+    api.updateAvatar(link)
+      .then(res => {
+        // console.log('res', res)
+        userInfo.setUserInfo(link)
+        avatarPopup.close()
+        
+      })
+  }
+})
 
-// avatarPopup.setEventListeners()
-
-
-// if(data.avatar) {
-//   this._userAvatar.style.backroundImage = `url(${data.avatar})`
-// }
+avatarPopup.setEventListeners()
 
 

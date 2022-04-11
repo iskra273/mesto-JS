@@ -16,7 +16,7 @@ export const popupImageCaption =  document.querySelector('.popup__caption');
 // Модальные окна
 export const profileEditModal =  document.querySelector('.popup_type_edit')
 export const cardAddModal = document.querySelector('.popup_type_add-element')
-export const avatarEditModal = document.querySelector('.profile__avatar-foto-edit')
+export const avatarEditModal = document.querySelector('.popup_type_avatar')
 
 // Формы
 export const profileEditForm =  profileEditModal.querySelector('.popup__form')
@@ -35,7 +35,7 @@ export const profileEditModalCloseButton = profileEditModal.querySelector('.popu
 export const cardAddButton = document.querySelector('.profile__add')
 export const cardAddModalCloseButton = cardAddModal.querySelector('.popup__close');
 export const imageCloseButton = imageOpenModal.querySelector('.popup__close');
-export const avatarEditButton = avatarEditModal.querySelector('.profile__avatar-foto-edit');
+export const avatarEditButton = document.querySelector('.profile__avatar-foto-edit');
 
 // Общее
 export const containerSelector = '.elements'

@@ -1,5 +1,3 @@
-import { data } from "autoprefixer"
-
 class Api {
   constructor({baseUrl, headers}) {
     this._headers = headers
@@ -89,16 +87,19 @@ class Api {
   }
 
   // 9. Обновление аватара пользователя
-  // updateAvatar(avatar) {
-  //   return fetch(`${this._baseUrl}/users/me/avatar`, {
-  //     method: "PATCH",  
-  //     headers: this._headers,
-  //     body: JSON.stringify({
-  //       avatar: data.avatar,
-  //     })
-  //   }).then(res => res.ok ? res.json() : Promise.reject(res.status))
-  //     .catch(console.log)      
-  // }
+  updateAvatar(avatar) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",  
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar
+      })
+    }).then(res => res.ok ? res.json() : Promise.reject(res.status))
+      .catch(console.log)
+      .then(res => {
+        console.log('res', res)
+      })      
+  }
 
 }
   
