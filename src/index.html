@@ -15,13 +15,17 @@
   
     <main>
       <section class="profile">
-        <img src="<%=require('./images/avatar.jpg')%>" alt="Фото профиля" class="profile__avatar-foto">
+        <div class="profile__avatar-edit">
+          <img src="<%=require('./images/avatar.jpg')%>" alt="Фото профиля" class="profile__avatar-foto">
+          <div class="profile__avatar-foto-edit"></div>
+        </div>
+        
         <div class="profile__info">
           <div class="profile__title">
-            <h1 class="profile__info-title">Жак-Ив Кусто</h1>
+            <h1 class="profile__info-title"></h1>
             <button type="button" class="profile__edit"></button>
           </div>
-          <p class="profile__info-subtitle">Исследователь океана</p>  
+          <p class="profile__info-subtitle"></p>
         </div>
         <button type="button" class="profile__add">
         </button>
@@ -63,6 +67,28 @@
     </div>
   </section> 
 
+  <section class="popup popup_type_delete-confirm">
+    <div class="popup__container">
+      <button type="button" class="popup__close"></button>
+      <form name="popup" class="popup__form" novalidate>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <button type = "submit" class="popup__save">Да</button>
+      </form>                           
+    </div>
+  </section>
+
+  <section class="popup popup_type_avatar">
+    <div class="popup__container">
+      <button type="button" class="popup__close"></button>
+      <form name="popup" class="popup__form" novalidate>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <input id="link-input" type="url" minlength="1" name="link" required class="popup__input popup__input_name_add-link" placeholder = "Ссылка на картинку" value = "">
+        <span id="error-link-input" class="popup__error popup__error_visible"></span>
+        <button type = "submit" class="popup__save popup__save">Сохранить</button>
+      </form>                           
+    </div>
+  </section>
+
   <section class="popup popup_type_image-element">
     <div class="popup__container-image">
       <button type="button" class="popup__close"></button>
@@ -80,11 +106,10 @@
       <div class="element__title">
         <h2 class="element__name"></h2>
         <button type="button" class="element__like"></button>
+        <span class="element__like-count"></span>
       </div>
     </div>
   </template>
   
-  
-
 </body>
 </html>

@@ -1,8 +1,8 @@
 // отрисовывает элементы на странице, у класса нет своей разметки - он получает разметку через функцию колбэк и вставляет ее в контейнер
 export class Section {
   constructor({items, renderer}, containerSelector) {
-    this._initialCards = items;
     this._container = document.querySelector(containerSelector);
+    this._initialCards = items;
     this._renderer = renderer;
   }
 
