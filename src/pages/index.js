@@ -6,6 +6,7 @@ import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithConfirm } from '../components/PopupWithConfirm.js';
 import { UserInfo } from '../components/UserInfo.js';
 import '../pages/index.css';
 import { api } from '../components/Api.js';
@@ -13,17 +14,34 @@ import { api } from '../components/Api.js';
 
 let userId
 
+Promise.all([api.getProfile(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userId = userData._id
+    
+    cards.forEach(data => {
+      const card = createElement({
+        name: data.name,
+        link: data.link,
+        likes: data.likes,
+        id: data._id,
+        userId: userId,
+        ownerId: data.owner._id
+      })  
+      cardList.addItem(card) 
+    })  
+  })
+
 api.getProfile()
   .then(res => {
-    // console.log('ответ', res)
     userInfo.setUserInfo(res.name, res.about, res.avatar)
-    
     userId = res._id
+  })
+  .catch((err) => {
+    console.error(err);
   })
 
 api.getInitialCards()
   .then(cardListNew => {
-    console.log('cardListNew', cardListNew)
     cardListNew.forEach(data => {
       const card = createElement({
         name: data.name,
@@ -34,38 +52,13 @@ api.getInitialCards()
         ownerId: data.owner._id
       })  
            
-      cardList.addItem(card) 
-      // console.log(cardListNew)
+      cardList.addItem(card)
     })  
+  })
+  .catch((err) => {
+    console.error(err);
   })  
 
-
-export const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 
 // Валидация форм
@@ -75,6 +68,7 @@ const avatarEditFormValidator = new FormValidator(validationConfig, avatarEditFo
 formEditValidator.enableValidation()
 сardAddFormValidator.enableValidation()
 avatarEditFormValidator.enableValidation()
+
 
 // Открытие попапа фото
 function handleCardClick(name, link) {
@@ -89,11 +83,9 @@ avatarEditButton.addEventListener('click', function() {
 
 // Открытие попапа редактирования профайла
 profileEditButton.addEventListener('click', function() {
-  
   const userData = userInfo.getUserInfo();
   inputProfileTitle.value = userData.userTitle;
   inputProfileSubtitle.value = userData.userSubtitle;
-
   formEditValidator.toggleButton()
   profileEditFormNew.open();
 })
@@ -103,48 +95,6 @@ cardAddButton.addEventListener('click', function() {
   сardAddFormValidator.toggleButton()
   popupAddCardNew.open();
 })
-
- 
-// Создание карточки
-function createElement(elementData) {
-  const card = new Card(
-    elementData, 
-    cardTemplateSelector, 
-    handleCardClick,
-    (id) => {
-      confirmPopup.open()
-      confirmPopup.changeSubmitHandler(() => {
-        api.deleteCard(id)
-          .then(res => {
-            card.deleteCard()
-            confirmPopup.close()
-            // console.log(res)
-          })
-      })  
-    },
-    (id) => {
-      if(card.isLiked()) {
-        api.deleteLike(id)
-        .then(res => {
-          card.setLikes(res.likes)
-        })
-      } else {
-          api.addLike(id)
-          .then(res => {
-            card.setLikes(res.likes)
-          })
-      }       
-    },
-  );
-
-  const cardElement = card.createCard()
-  return cardElement
-}
-
-function createCardElement(cardElement) {
-  const cardElementNew = createElement(cardElement)
-  cardList.addItem(cardElementNew) 
-}
 
 const cardList = new Section({ 
   items: [],
@@ -162,7 +112,57 @@ const userInfo = new UserInfo({
 });
 
 const popupImage = new PopupWithImage ('.popup_type_image-element');
-popupImage.setEventListeners();
+const confirmPopup = new PopupWithConfirm('.popup_type_delete-confirm');
+
+// Создание карточки
+function createElement(elementData) {
+  const card = new Card(
+    elementData, 
+    cardTemplateSelector, 
+    handleCardClick,
+    (id) => {
+      confirmPopup.open()
+      confirmPopup.changeSubmitHandler(() => {
+        api.deleteCard(id)
+          .then(res => {
+            card.deleteCard()
+            confirmPopup.close()
+          })
+          .catch((err) => {
+            console.error(err);
+          })
+      })  
+    },
+    (id) => {
+      if(card.isLiked()) {
+        api.deleteLike(id)
+        .then(res => {
+          card.setLikes(res.likes)
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+      } else {
+          api.addLike(id)
+          .then(res => {
+            card.setLikes(res.likes)
+          })
+          .catch((err) => {
+            console.error(err);
+          })
+      }       
+    },
+  );
+
+  const cardElement = card.createCard()
+  return cardElement
+}
+
+function createCardElement(cardElement) {
+  const cardElementNew = createElement(cardElement)
+  cardList.addItem(cardElementNew) 
+}
+
 
 //Закрытие редактирования профиля
 const profileEditFormNew = new PopupWithForm({
@@ -176,23 +176,23 @@ const profileEditFormNew = new PopupWithForm({
         userInfo.setUserInfo({name: title, job:subtitle})
         profileEditFormNew.close();
       })
+      .catch((err) => {
+        console.error(err);
+      })
       .finally(() => {
         profileEditFormNew.changeButtonMessage(false);
-      })
+      }) 
   } 
 })
 
-profileEditFormNew.setEventListeners()
 
 //Закрытие добавления места
 const popupAddCardNew = new PopupWithForm({
   popupSelector:'.popup_type_add-element', 
   handleFormSubmit: (data) => {   
-    // console.log(data)
     popupAddCardNew.changeButtonMessage(true);
     api.addCard(data.name, data.link)
       .then(res => {
-        // console.log('res', res)
         const cardElementAdd = createElement({
           name: res.name,
           link: res.link,
@@ -205,31 +205,28 @@ const popupAddCardNew = new PopupWithForm({
         cardList.addItem(cardElementAdd); 
         popupAddCardNew.close();
       })
+      .catch((err) => {
+        console.error(err);
+      })
       .finally(() => {
         popupAddCardNew.changeButtonMessage(false);
-      })
+      }) 
     }
 })
 
-popupAddCardNew.setEventListeners()
-
-const confirmPopup = new PopupWithForm({
-  popupSelector:'.popup_type_delete-confirm'
-})
-
-confirmPopup.setEventListeners()
-
+// Закрытие редактирование аватара
 const avatarPopup = new PopupWithForm({
   popupSelector:'.popup_type_avatar',
   handleFormSubmit: (data) => {
     avatarPopup.changeButtonMessage(true);
-   
     const {link} = data
     api.updateAvatar(link)
       .then(res => {
-        // console.log('res', res)
         userInfo.setUserInfo({avatar: link})
         avatarPopup.close()
+      })
+      .catch((err) => {
+        console.error(err);
       })
       .finally(() => {
         avatarPopup.changeButtonMessage(false);
@@ -237,6 +234,10 @@ const avatarPopup = new PopupWithForm({
   }
 })
 
-avatarPopup.setEventListeners()
+profileEditFormNew.setEventListeners();
+popupAddCardNew.setEventListeners();
+popupImage.setEventListeners();
+confirmPopup.setEventListeners();
+avatarPopup.setEventListeners();
 
 

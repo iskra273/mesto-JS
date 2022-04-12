@@ -12,12 +12,6 @@ export class UserInfo {
         }
     }
 
-    // setUserInfo(name, job, avatar) {
-    //     this._profileTitle.textContent = name,
-    //     this._profileSubtitle.textContent = job,
-    //     this._avatar.src = avatar
-    // } 
-
     setUserInfo({name, job, avatar}) {
         if (name) {
             this._profileTitle.textContent = name;
@@ -27,8 +21,6 @@ export class UserInfo {
         }
         if (avatar) {
             this._avatar.src = avatar
-        }
-            
-            
+        }   
     } 
 }

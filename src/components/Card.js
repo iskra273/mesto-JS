@@ -1,5 +1,3 @@
-import {containerSelector, cardTemplateSelector} from "../utils/constants.js";
-
 export class Card {
   constructor(elementData, cardTemplateSelector, handleCardClick, handleDeleteClick, handleLikeClick) {
     this._name = elementData.name;
@@ -19,22 +17,13 @@ export class Card {
     this._element = null;
   };
 
-  
-  _openImage = () => {
-    this._handleCardClick(this._name, this._link)
-  };
-
   _setEventListeners() {
-    this._likeButton.addEventListener('click', this._toggleLike);
     this._likeButton.addEventListener('click', () => this._handleLikeClick(this._id));
     this._deleteButton.addEventListener('click', () => this._handleDeleteClick(this._id));
-    this._elementImage.addEventListener('click', this._openImage);
+    this._elementImage.addEventListener('click', () => this._handleCardClick(this._name, this._link));
   }
   
-  _toggleLike = () => {
-    this._likeButton.classList.toggle('element__like_active');
-  };
-  
+
   isLiked() {
     const userHasLikeCard = this._likes.find(user => user._id === this._userId)
     return userHasLikeCard
@@ -46,10 +35,19 @@ export class Card {
     likeCountElement.textContent = this._likes.length
 
     if(this.isLiked()) {
-      this._toggleLike()
+      this._addLike()
+    } else {
+      this._deleteLike()
     }
   }
 
+  _addLike = () => {
+    this._likeButton.classList.add('element__like_active');
+  };
+
+  _deleteLike = () => {
+    this._likeButton.classList.remove('element__like_active');
+  };
 
   _fillCard() {
     this._elementName.textContent = this._name

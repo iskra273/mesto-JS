@@ -31,11 +31,12 @@ export const inputProfileSubtitle = document.querySelector('.popup__input_name_s
 
 // Кнопки
 export const profileEditButton = document.querySelector('.profile__edit');
-export const profileEditModalCloseButton = profileEditModal.querySelector('.popup__close');
 export const cardAddButton = document.querySelector('.profile__add');
+export const avatarEditButton = document.querySelector('.profile__avatar-foto-edit');
+export const profileEditModalCloseButton = profileEditModal.querySelector('.popup__close');
 export const cardAddModalCloseButton = cardAddModal.querySelector('.popup__close');
 export const imageCloseButton = imageOpenModal.querySelector('.popup__close');
-export const avatarEditButton = document.querySelector('.profile__avatar-foto-edit');
+
 
 // Общее
 export const containerSelector = '.elements';

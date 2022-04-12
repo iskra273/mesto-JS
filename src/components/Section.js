@@ -8,7 +8,7 @@ export class Section {
 
   // принимает DOM-элемент и добавляет его в контейнер
   addItem(element) {
-    this._container.prepend(element)
+    this._container.append(element)
   };
     
   // отрисовка каждого отдельного элемента

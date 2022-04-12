@@ -3,23 +3,30 @@ class Api {
     this._headers = headers
     this._baseUrl = baseUrl
   }
-    
+  
+  _getResponse(res) {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(res.status)
+    }
+  }
+ 
   //1.Загрузка инф-ции о пользователе с сервера  
   getProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
         headers: this._headers
     })
-    .then(res => res.ok ? res.json() : Promise.reject(res.status))
+    .then(this._getResponse)
     .catch(console.log)
   }
-
 
   // 2.Загрузка карточек с сервера
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
         headers: this._headers
     })
-    .then(res => res.ok ? res.json() : Promise.reject(res.status))
+    .then(this._getResponse)
     .catch(console.log)  
   }
   
@@ -27,7 +34,6 @@ class Api {
   editProfile(name, about) {
     console.log('editProfile')
     return fetch(`${this._baseUrl}/users/me`, {
-     
       method: "PATCH",  
       headers: this._headers,
       body: JSON.stringify({
@@ -35,7 +41,7 @@ class Api {
         about
       })
     })
-    .then(res => res.ok ? res.json() : Promise.reject(res.status))
+    .then(this._getResponse)
     .catch(console.log)  
   }
 
@@ -49,9 +55,8 @@ class Api {
         link
       })
     })
-    .then(res => res.ok ? res.json() : Promise.reject(res.status))
+    .then(this._getResponse)
     .catch(console.log)  
-    
   }
   
   //7. Удаление карточки
@@ -60,9 +65,9 @@ class Api {
       method: "DELETE",  
       headers: this._headers
       
-    }).then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .catch(console.log)  
-    
+    })
+    .then(this._getResponse)
+    .catch(console.log)  
   }
 
   // 8. Постановка и снятие лайка
@@ -70,20 +75,18 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "DELETE",  
       headers: this._headers
-      
-    }).then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .catch(console.log)  
-    
+    })
+    .then(this._getResponse)
+    .catch(console.log)  
   } 
 
   addLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "PUT",  
       headers: this._headers
-      
-    }).then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .catch(console.log)  
-    
+    })
+    .then(this._getResponse)
+    .catch(console.log)  
   }
 
   // 9. Обновление аватара пользователя
@@ -94,13 +97,13 @@ class Api {
       body: JSON.stringify({
         avatar
       })
-    }).then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .catch(console.log)
-      .then(res => {
-        console.log('res', res)
-      })      
+    })
+    .then(this._getResponse)  
+    .catch(console.log)
+    .then(res => {
+      console.log('res', res)
+    })      
   }
-
 }
   
 export const api = new Api({
