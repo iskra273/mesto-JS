@@ -1,11 +1,11 @@
 .profile__avatar-edit{
-    position: relative;
-    display: flex;
     padding: 0;
     margin-top: 0;
-    margin-right: 30px;
+    margin-right: 0;
     margin-left: 0;
     margin-bottom: 0;
+    position: relative;
+    display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
@@ -15,3 +15,10 @@
     visibility: visible;
     opacity: 1;
   }
+
+
+  /* @media screen and (max-width: 540px) {
+    .profile__avatar-edit {
+      margin: 0 0 14px;
+    }
+  } */

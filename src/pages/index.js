@@ -1,4 +1,4 @@
-import { validationConfig, profileEditForm, cardAddForm, avatarEditForm, profileEditButton, 
+import { validationConfig, profileEditModal, cardAddModal, avatarEditModal, profileEditForm, cardAddForm, avatarEditForm, profileEditButton, 
   cardAddButton, avatarEditButton, cardTemplateSelector, containerSelector, inputProfileTitle, inputProfileSubtitle
 } from '../utils/constants.js';
 import { FormValidator } from '../components/FormValidator.js';
@@ -17,6 +17,7 @@ api.getProfile()
   .then(res => {
     // console.log('ответ', res)
     userInfo.setUserInfo(res.name, res.about, res.avatar)
+    
     userId = res._id
   })
 
@@ -163,25 +164,32 @@ const userInfo = new UserInfo({
 const popupImage = new PopupWithImage ('.popup_type_image-element');
 popupImage.setEventListeners();
 
+//Закрытие редактирования профиля
 const profileEditFormNew = new PopupWithForm({
   popupSelector:'.popup_type_edit', 
   handleFormSubmit: (data) => {
+    profileEditFormNew.changeButtonMessage(true);
+    
     const {title, subtitle} = data
     api.editProfile(title, subtitle)
       .then(res => {
-        userInfo.setUserInfo(title, subtitle)
-        profileEditFormNew.close()
+        userInfo.setUserInfo({name: title, job:subtitle})
+        profileEditFormNew.close();
+      })
+      .finally(() => {
+        profileEditFormNew.changeButtonMessage(false);
       })
   } 
 })
 
 profileEditFormNew.setEventListeners()
 
+//Закрытие добавления места
 const popupAddCardNew = new PopupWithForm({
   popupSelector:'.popup_type_add-element', 
   handleFormSubmit: (data) => {   
     // console.log(data)
-    
+    popupAddCardNew.changeButtonMessage(true);
     api.addCard(data.name, data.link)
       .then(res => {
         // console.log('res', res)
@@ -197,6 +205,9 @@ const popupAddCardNew = new PopupWithForm({
         cardList.addItem(cardElementAdd); 
         popupAddCardNew.close();
       })
+      .finally(() => {
+        popupAddCardNew.changeButtonMessage(false);
+      })
     }
 })
 
@@ -211,14 +222,17 @@ confirmPopup.setEventListeners()
 const avatarPopup = new PopupWithForm({
   popupSelector:'.popup_type_avatar',
   handleFormSubmit: (data) => {
-    console.log(data)
+    avatarPopup.changeButtonMessage(true);
+   
     const {link} = data
     api.updateAvatar(link)
       .then(res => {
         // console.log('res', res)
-        userInfo.setUserInfo(link)
+        userInfo.setUserInfo({avatar: link})
         avatarPopup.close()
-        
+      })
+      .finally(() => {
+        avatarPopup.changeButtonMessage(false);
       })
   }
 })

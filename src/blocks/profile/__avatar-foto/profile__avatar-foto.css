@@ -1,12 +1,12 @@
 .profile__avatar-foto {
-    max-width: 120px;
+    width: 120px;
     height: 120px;
     background: #C4C4C4;
     border-radius: 50%;
 }
 
-@media screen and (max-width: 540px) {
+/* @media screen and (max-width: 540px) {
 	.profile__avatar-foto {
         min-height: 120px;
     }
-}
+} */

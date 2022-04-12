@@ -12,10 +12,23 @@ export class UserInfo {
         }
     }
 
-    setUserInfo(name, job, avatar) {
-        this._profileTitle.textContent = name,
-        this._profileSubtitle.textContent = job,
-        this._avatar.src = avatar
-    } 
+    // setUserInfo(name, job, avatar) {
+    //     this._profileTitle.textContent = name,
+    //     this._profileSubtitle.textContent = job,
+    //     this._avatar.src = avatar
+    // } 
 
+    setUserInfo({name, job, avatar}) {
+        if (name) {
+            this._profileTitle.textContent = name;
+        }
+        if (job) {
+            this._profileSubtitle.textContent = job;
+        }
+        if (avatar) {
+            this._avatar.src = avatar
+        }
+            
+            
+    } 
 }

@@ -5,6 +5,7 @@ export class PopupWithForm extends Popup {
         super(popupSelector);
         this._handleFormSubmit = handleFormSubmit
         this._form = this._popup.querySelector('.popup__form')
+        this._formSubmitButton = this._form.querySelector('.popup__save')
     }
 
     _getInputValues = () => {
@@ -33,4 +34,13 @@ export class PopupWithForm extends Popup {
         super.close();
         this._form.reset();
     };
+
+
+    changeButtonMessage(isLoading) {
+        if (isLoading === true) {
+            this._formSubmitButton.textContent = 'Сохранение...';
+        } else {
+            this._formSubmitButton.textContent = 'Сохранить';
+        }
+    }
 }
