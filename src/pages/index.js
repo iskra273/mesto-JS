@@ -202,7 +202,7 @@ const popupAddCardNew = new PopupWithForm({
           ownerId: res.owner._id
         });
         
-        cardList.addItem(cardElementAdd); 
+        cardList.addItemNew(cardElementAdd); 
         popupAddCardNew.close();
       })
       .catch((err) => {

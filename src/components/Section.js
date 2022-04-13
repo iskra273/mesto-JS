@@ -10,7 +10,11 @@ export class Section {
   addItem(element) {
     this._container.append(element)
   };
-    
+
+  addItemNew(element) {
+    this._container.prepend(element)
+  };
+
   // отрисовка каждого отдельного элемента
   renderer() {
     this._initialCards.forEach(card => 
